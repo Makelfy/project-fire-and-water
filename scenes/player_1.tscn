@@ -1,16 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq4453rj5fqu"]
+[gd_scene format=3 uid="uid://dhxnglxw875j3"]
 
-[ext_resource type="Script" path="res://scripts/player_1.gd" id="1_rfmnd"]
+[ext_resource type="Script" uid="uid://rdk6e6blqqpx" path="res://scripts/player_1.gd" id="1_rfmnd"]
+[ext_resource type="Texture2D" uid="uid://bp4xrt1doedns" path="res://assets/images/player.jpg" id="2_gneq0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxx23"]
 size = Vector2(128, 125)
 
-[node name="player1" type="CharacterBody2D" groups=["player"]]
+[node name="player1" type="CharacterBody2D" unique_id=1766431460 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_rfmnd")
+KNOCKBACK_FORCE = 1000.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=21099828]
+scale = Vector2(0.256, 0.256)
+texture = ExtResource("2_gneq0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890329774]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_bxx23")
+
+[node name="Timer" type="Timer" parent="." unique_id=1677668276]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,20 +1,24 @@
 [gd_scene format=3 uid="uid://cbri65q50s534"]
 
-[ext_resource type="Script" uid="uid://dao3uxxfc3fdl" path="res://scripts/enemy.gd" id="1_md0e3"]
-[ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_4ra3w"]
+[ext_resource type="Script" uid="uid://tmiphng0pjrv" path="res://scripts/Knockback.cs" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://du68ty88opg1o" path="res://assets/images/enemy2.jpg" id="2_md0e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
 size = Vector2(130, 109)
 
 [node name="Enemy" type="Area2D" unique_id=1901609634]
-position = Vector2(576, 448)
+position = Vector2(544, 432)
+collision_mask = 7
 script = ExtResource("1_md0e3")
+Distance = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981531920]
 position = Vector2(2, 7.5)
 shape = SubResource("RectangleShape2D_5uy6h")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=930018956]
-position = Vector2(0, -2)
-scale = Vector2(3, 3)
-texture = ExtResource("2_4ra3w")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1997656181]
+position = Vector2(1.0000113, 8.000004)
+scale = Vector2(0.47368428, 0.41328415)
+texture = ExtResource("2_md0e3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
