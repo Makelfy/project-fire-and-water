@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbri65q50s534"]
 
-[ext_resource type="Script" uid="uid://dao3uxxfc3fdl" path="res://enemy.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://dao3uxxfc3fdl" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_4ra3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
@@ -9,7 +9,6 @@ size = Vector2(130, 109)
 [node name="Enemy" type="Area2D" unique_id=1901609634]
 position = Vector2(576, 448)
 script = ExtResource("1_md0e3")
-DISTANCE = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981531920]
 position = Vector2(2, 7.5)
