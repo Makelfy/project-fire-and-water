@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cvfc0dhnyh560"]
+
+[ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="1_j8ivh"]
+[ext_resource type="PackedScene" uid="uid://dhxnglxw875j3" path="res://scenes/player_1.tscn" id="2_nd71p"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ddre"]
+
+[node name="TestScene" type="StaticBody2D" unique_id=348861856]
+position = Vector2(560, 640)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=295182384]
+shape = SubResource("WorldBoundaryShape2D_7ddre")
+
+[node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("1_j8ivh")]
+position = Vector2(320, -176)
+
+[node name="player1" parent="." unique_id=962409094 instance=ExtResource("2_nd71p")]
+position = Vector2(-144, -152)

@@ -27,3 +27,12 @@ func _physics_process(delta: float) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		var sprite = body.get_child(0)
+		sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
+		body.start_timer()
+		if body.has_method("apply_knockback"):
+			body.apply_knockback(global_position)
