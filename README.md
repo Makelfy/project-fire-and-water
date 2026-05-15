@@ -28,11 +28,8 @@ The core experience revolves around the relationship between two players navigat
 | Feature | Description |
 | --- | --- |
 | **Combat** | Light-based combat mechanics; you must shine light to deal damage.
-
 | **Movement** | Platforming-based navigation governed by a **stamina system**.
-
 | **Progression** | Players can find **loot** and use items to obtain **upgrades**.
-
 | **Quantity** | The project currently notes specific counts of 7 and 5  (potentially levels or key items).
 
 ---
