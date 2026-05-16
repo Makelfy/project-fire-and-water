@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 
 	if(Input.is_action_just_pressed("attack") and not is_attacking):
 		start_attack()
-		
+	
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -51,14 +51,16 @@ func _physics_process(delta: float) -> void:
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("left2", "right2")
 		if direction:
+			$AnimatedSprite2D.flip_h = true
 			if(velocity.x == 0):
 				velocity.x = direction * SPEED
 			elif(velocity.x < MAX_SPEED and velocity.x > -MAX_SPEED):
 				velocity.x += direction*ACC
 			else:
 				velocity.x = direction * MAX_SPEED
-			$attack/Sprite2D.flip_h = false if direction == -1 else true
-			$attack.position.x = -88 if velocity.x < 0 else 0
+			$attack.position.x = -80 if velocity.x < 0 else 0 
+			$AnimatedSprite2D.flip_h = direction == -1
+			$attack/Sprite2D.flip_h = direction == -1
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
@@ -66,16 +68,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func start_attack():
-	if is_dead:
-		return
-
-	is_attacking = true
-	$AttackTimer.start()
-	$attack.show()
-	$attack/CollisionShape2D.set_deferred("disabled", false)
-	await get_tree().create_timer(0.1).timeout
-	$attack/CollisionShape2D.set_deferred("disabled", true)
-	$attack.hide()
+	is_attacking = true	
+	$AnimatedSprite2D.play("ATTACK")
 
 func handle_death() -> void:
 	if is_dead:
@@ -144,3 +138,13 @@ func _on_attack_area_entered(area: Area2D) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	is_attacking = false
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	$AttackTimer.start()
+	$attack.show()
+	$attack/CollisionShape2D.set_deferred("disabled", false)
+	await get_tree().create_timer(0.1).timeout
+	$attack/CollisionShape2D.set_deferred("disabled", true)
+	$attack.hide()
+	$AnimatedSprite2D.play("default")
