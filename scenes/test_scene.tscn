@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://orj71d5lbbyq" path="res://assets/images/background.jpg" id="3_nd71p"]
 [ext_resource type="PackedScene" uid="uid://bh8t3lwtdxfk6" path="res://scenes/player_2.tscn" id="4_7ddre"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="5_qjeyg"]
-[ext_resource type="Script" uid="uid://cu86vlmtay04e" path="res://scripts/canvas_layer.gd" id="6_canvas"]
+[ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="6_canvas"]
 [ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="7_gameover"]
-[ext_resource type="PackedScene" uid="uid://ctl5h63pnluex" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
+[ext_resource type="PackedScene" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ddre"]
 
@@ -78,7 +78,6 @@ sources/0 = SubResource("TileSetAtlasSource_3qnke")
 position = Vector2(560, 639)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
-visible = false
 position = Vector2(16.000122, -316)
 scale = Vector2(0.25599992, 0.21066669)
 color = Color(0, 0, 0, 1)
