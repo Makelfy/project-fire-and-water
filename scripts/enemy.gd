@@ -1,38 +1,46 @@
 extends Area2D
 
 const SPEED = 150
-const DELTA_TO_CHANGE = 30
 
-@export var DISTANCE : float
+@export var Distance := 100.0
 
-var default_pos_x
-var direction
+var start_pos_x: float
+var direction: int = 1
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	default_pos_x = global_position.x
-	direction = 1
-
+	# Save the initial starting position
+	start_pos_x = global_position.x
 
 func _physics_process(delta: float) -> void:
-	if abs(default_pos_x - global_position.x) <= DISTANCE:
-		global_position.x += SPEED * delta * direction
-	else:
-		direction *= -1
-		global_position.x += direction * 10
-		
-		$Sprite2D.flip_h = false if direction == -1 else true  
-	
+	# Do nothing if Distance is 0 or negative
+	if Distance <= 0:
+		return
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	# 1. Move the object
+	global_position.x += SPEED * delta * direction
 
+	# 2. Check if it hit the right boundary
+	if global_position.x >= start_pos_x + Distance:
+		direction = -1
+		_update_sprite()
+
+	# 3. Check if it hit the left boundary
+	elif global_position.x <= start_pos_x - Distance:
+		direction = 1
+		_update_sprite()
+
+# Extracted sprite logic to a helper function to keep the physics process clean
+func _update_sprite() -> void:
+	if has_node("Sprite2D"):
+		# If direction is -1 (left), flip_h is true. Otherwise, false.
+		$Sprite2D.flip_h = (direction == -1)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		var sprite = body.get_child(0)
-		sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
 		body.start_timer()
+
+		if body.has_method("take_damage"):
+			body.take_damage(30)
+
 		if body.has_method("apply_knockback"):
 			body.apply_knockback(global_position)

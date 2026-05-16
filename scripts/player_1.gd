@@ -1,30 +1,41 @@
 extends CharacterBody2D
 
+var HEALTH = Config.PLAYER_HEALTH
 
-const MAX_SPEED = 500.0
-const SPEED = 300.0
+var MAX_SPEED = Config.PLAYER_MAX_SPEED
+var SPEED = Config.PLAYER_SPEED
 const ACC = 20.0
-const JUMP_VELOCITY = -700.0
+var JUMP_VELOCITY = Config.PLAYER_JUMP_FORCE
 
 # Knockback parameters
-@export var KNOCKBACK_FORCE = 650.0
+@export var KNOCKBACK_FORCE = 300
 const KNOCKBACK_DURATION = 0.18
 const KNOCKBACK_FRICTION = 1800.0
 
 var knockback_time_left = 0.0
 
 var is_attacking = false
+var is_dead = false
 
 func _ready():
+	$AnimatedSprite2D.play("default")
 	$attack.hide()
 	$attack/CollisionShape2D.set_deferred("disabled", true)
 
 func _process(delta: float) -> void:
+	if is_dead:
+		return
+
 	if(Input.is_action_just_pressed("attack") and not is_attacking):
 		start_attack()
-		
+	
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += 1.5 * get_gravity() * delta
@@ -40,15 +51,24 @@ func _physics_process(delta: float) -> void:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("left2", "right2")
+		if Input.is_action_just_pressed("left2") or Input.is_action_just_pressed("right2"):
+			$AnimatedSprite2D.play("WALK")
+		if (Input.is_action_just_released("left2") and not Input.is_action_pressed("right2")
+		) or (Input.is_action_just_released("right2") and not Input.is_action_pressed("left2")):
+			$AnimatedSprite2D.play("default")
+		
+
 		if direction:
+			$AnimatedSprite2D.flip_h = true
 			if(velocity.x == 0):
 				velocity.x = direction * SPEED
 			elif(velocity.x < MAX_SPEED and velocity.x > -MAX_SPEED):
 				velocity.x += direction*ACC
 			else:
 				velocity.x = direction * MAX_SPEED
-			$attack/Sprite2D.flip_h = false if direction == -1 else true
-			$attack.position.x = -192 if velocity.x < 0 else 0 
+			$attack.position.x = -80 if velocity.x < 0 else 0 
+			$AnimatedSprite2D.flip_h = direction == -1
+			$attack/Sprite2D.flip_h = direction == -1
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
@@ -56,17 +76,52 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func start_attack():
-	is_attacking = true
-	$AttackTimer.start()
-	$attack.show()
-	$attack/CollisionShape2D.set_deferred("disabled", false)
-	await get_tree().create_timer(0.1).timeout
-	$attack/CollisionShape2D.set_deferred("disabled", true)
-	$attack.hide()
-	
+	is_attacking = true	
+	$AnimatedSprite2D.play("ATTACK")
 
+func handle_death() -> void:
+	if is_dead:
+		return
+
+	is_dead = true
+	velocity = Vector2.ZERO
+	knockback_time_left = 0.0
+	is_attacking = false
+	$AttackTimer.stop()
+	$attack.hide()
+	$attack/CollisionShape2D.set_deferred("disabled", true)
+
+	var scene_root := get_tree().current_scene if get_tree().current_scene != null else get_parent()
+	var canvas_layer := scene_root.get_node_or_null("CanvasLayer")
+	if canvas_layer:
+		canvas_layer.visible = true
+		var game_over_scene := canvas_layer.get_node_or_null("GameOverScene")
+		if game_over_scene:
+			game_over_scene.visible = true
+
+	get_tree().paused = true
+
+var damage_cooldown = false
+func take_damage(damage: float) -> void:
+	if is_dead:
+		return
+
+	print("damage")
+	if not damage_cooldown:
+		damage_cooldown = true
+		HEALTH -= damage
+		if HEALTH <= 0:
+			handle_death()
+		await get_tree().create_timer(1).timeout
+		damage_cooldown = false
 
 func apply_knockback(source_position: Vector2) -> void:
+	if is_dead:
+		return
+
+	var sprite = $Sprite2D
+	sprite.modulate = Color(HEALTH/100, 0.0, 0.0, 1.0)
+
 	var knockback_direction := global_position - source_position
 	if knockback_direction.length_squared() == 0.0:
 		knockback_direction = Vector2.LEFT if velocity.x <= 0.0 else Vector2.RIGHT
@@ -91,3 +146,13 @@ func _on_attack_area_entered(area: Area2D) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	is_attacking = false
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	$AttackTimer.start()
+	$attack.show()
+	$attack/CollisionShape2D.set_deferred("disabled", false)
+	await get_tree().create_timer(0.1).timeout
+	$attack/CollisionShape2D.set_deferred("disabled", true)
+	$attack.hide()
+	$AnimatedSprite2D.play("default")

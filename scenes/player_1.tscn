@@ -1,25 +1,67 @@
 [gd_scene format=3 uid="uid://drb5fwqdgypqh"]
 
 [ext_resource type="Script" uid="uid://rdk6e6blqqpx" path="res://scripts/player_1.gd" id="1_rfmnd"]
-[ext_resource type="Texture2D" uid="uid://bp4xrt1doedns" path="res://assets/images/player.jpg" id="2_gneq0"]
-[ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="3_f7tsm"]
+[ext_resource type="Texture2D" uid="uid://daujrr181n68s" path="res://assets/images/player1_attack.png" id="2_f2c3w"]
+[ext_resource type="Texture2D" uid="uid://c7baat0ta8y7i" path="res://assets/images/player1_idle2.png" id="2_vod78"]
+[ext_resource type="Texture2D" uid="uid://c22oxs1ihfxb1" path="res://assets/images/player1_attack2.png" id="3_jkihx"]
+[ext_resource type="Texture2D" uid="uid://be6qoqyjie57q" path="res://assets/images/player1_idle.png" id="3_wqd30"]
+[ext_resource type="Texture2D" uid="uid://mngca1f68w3e" path="res://assets/images/player1_walk.png" id="4_jkihx"]
+[ext_resource type="Texture2D" uid="uid://mvl2lba07x3m" path="res://assets/images/attack.png" id="6_qgfdq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f2c3w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f2c3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jkihx")
+}],
+"loop": false,
+"name": &"ATTACK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jkihx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wqd30")
+}],
+"loop": true,
+"name": &"WALK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vod78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wqd30")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxx23"]
-size = Vector2(104, 112)
+size = Vector2(32, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vod78"]
-size = Vector2(82, 98)
+size = Vector2(40, 64.5)
 
 [node name="player1" type="CharacterBody2D" unique_id=1766431460 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_rfmnd")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=21099828]
-scale = Vector2(0.256, 0.256)
-texture = ExtResource("2_gneq0")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1339888960]
+texture_filter = 5
+position = Vector2(32, -32)
+scale = Vector2(1, 0.963)
+sprite_frames = SubResource("SpriteFrames_f2c3w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890329774]
-position = Vector2(-4, 8)
+position = Vector2(32, -28)
 shape = SubResource("RectangleShape2D_bxx23")
 
 [node name="Timer" type="Timer" parent="." unique_id=1677668276]
@@ -29,16 +71,17 @@ one_shot = true
 [node name="attack" type="Area2D" parent="." unique_id=723697341]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack" unique_id=1133127597]
-position = Vector2(103, -1)
+position = Vector2(68, -32)
 shape = SubResource("RectangleShape2D_vod78")
 
 [node name="Sprite2D" type="Sprite2D" parent="attack" unique_id=75441210]
-position = Vector2(101, 1.9073486e-06)
-scale = Vector2(0.546875, 0.75)
-texture = ExtResource("3_f7tsm")
+texture_filter = 3
+position = Vector2(72, -32)
+texture = ExtResource("6_qgfdq")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=705868225]
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="attack" to="." method="_on_attack_area_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

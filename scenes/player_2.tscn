@@ -1,13 +1,41 @@
 [gd_scene format=3 uid="uid://bh8t3lwtdxfk6"]
 
 [ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
-[ext_resource type="Texture2D" uid="uid://b04bxt2k1mpkn" path="res://assets/images/player2.png" id="2_s551d"]
-[ext_resource type="Script" uid="uid://b6dsyinuos1n0" path="res://scenes/flashlight.gd" id="3_0mr0g"]
+[ext_resource type="Texture2D" uid="uid://bvm445mk7hy2h" path="res://assets/images/player2_walk.png" id="2_povjg"]
+[ext_resource type="Script" path="res://scenes/flashlight.gd" id="3_0mr0g"]
+[ext_resource type="Texture2D" uid="uid://bur5u5wl1w8sr" path="res://assets/images/player2_idle.png" id="3_hkoe6"]
 [ext_resource type="Texture2D" uid="uid://djd1303uyfhgl" path="res://flashlight.jpg" id="3_oc1kf"]
-[ext_resource type="Script" uid="uid://rot75lxe0tp" path="res://scenes/point_light_2d_2.gd" id="4_0mr0g"]
+[ext_resource type="Script" path="res://scenes/point_light_2d_2.gd" id="4_0mr0g"]
+[ext_resource type="Texture2D" uid="uid://bm54cj3rmmdk8" path="res://assets/images/player2_idle2.png" id="4_ne6jw"]
+[ext_resource type="Texture2D" uid="uid://crmwlumyran8k" path="res://assets/images/flashlight.png" id="8_hkoe6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b2c7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_povjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hkoe6")
+}],
+"loop": true,
+"name": &"WALK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hkoe6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ne6jw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s551d"]
-size = Vector2(112, 112)
+size = Vector2(48, 48)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_0mr0g"]
 points = PackedVector2Array(352, -144, 0, 0, 384, 0, 496, -80, 480, -144)
@@ -16,16 +44,18 @@ points = PackedVector2Array(352, -144, 0, 0, 384, 0, 496, -80, 480, -144)
 collision_layer = 4
 script = ExtResource("1_l6tho")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=147848813]
-position = Vector2(-7.843875e-06, -1.0557432e-05)
-scale = Vector2(0.2570281, 0.34594592)
-texture = ExtResource("2_s551d")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2121929346]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_b2c7a")
+animation = &"WALK"
+frame_progress = 0.55000675
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665167375]
-position = Vector2(0, 1.5)
+position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_s551d")
 
 [node name="Flashlight" type="Area2D" parent="." unique_id=1799650891 groups=["player"]]
+position = Vector2(0, -8)
 script = ExtResource("3_0mr0g")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Flashlight" unique_id=1543392118]
@@ -40,6 +70,9 @@ script = ExtResource("4_0mr0g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flashlight" unique_id=1745057637]
 shape = SubResource("ConvexPolygonShape2D_0mr0g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Flashlight" unique_id=1043744740]
+texture = ExtResource("8_hkoe6")
 
 [node name="Timer" type="Timer" parent="." unique_id=405105296]
 wait_time = 3.0
