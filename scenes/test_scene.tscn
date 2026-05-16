@@ -18,8 +18,8 @@ position = Vector2(-144, -152)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1789583880]
 z_index = -2
-position = Vector2(16.000122, -316)
-scale = Vector2(0.25599992, 0.21066669)
+position = Vector2(79.50018, -275.50006)
+scale = Vector2(0.28422216, 0.23766665)
 texture = ExtResource("3_nd71p")
 
 [node name="player2" parent="." unique_id=845546760 instance=ExtResource("4_7ddre")]
