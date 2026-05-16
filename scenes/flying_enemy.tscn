@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://ctl5h63pnluex"]
+
+[ext_resource type="Script" uid="uid://dg36vct6kl7rx" path="res://scripts/flying_enemy.gd" id="1_lrtul"]
+[ext_resource type="Texture2D" uid="uid://1l6gcsaju5b7" path="res://assets/images/flying_enemy.png" id="2_dyvm4"]
+[ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="3_dyvm4"]
+[ext_resource type="Texture2D" uid="uid://clj6fbvqm0qvq" path="res://assets/images/flying_enemy2.png" id="3_ms2v3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
+size = Vector2(48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1bv63"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dyvm4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ms2v3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="FlyingEnemy" type="Area2D" unique_id=1901609634 groups=["enemy"]]
+position = Vector2(664, 352)
+collision_mask = 7
+script = ExtResource("1_lrtul")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981531920]
+position = Vector2(32, -32)
+shape = SubResource("RectangleShape2D_5uy6h")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2107277671]
+position = Vector2(32, -32)
+sprite_frames = SubResource("SpriteFrames_1bv63")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=1001041113]
+position = Vector2(29.333324, 5.333333)
+scale = Vector2(0.0017023658, 0.001966669)
+color = Color(1, 1, 0, 1)
+energy = 2.85
+shadow_enabled = true
+texture = ExtResource("3_dyvm4")
+texture_scale = 19.14
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=1020277725]
+position = Vector2(-16.000002, 2.6666625)
+scale = Vector2(0.041259736, 0.04434714)
+color = Color(1, 1, 0, 1)
+energy = 0.28
+shadow_enabled = true
+texture = ExtResource("3_dyvm4")
+texture_scale = 4.51
+
+[node name="PointLight2D3" type="PointLight2D" parent="Sprite2D" unique_id=878996065]
+position = Vector2(-21.000002, 9.000006)
+scale = Vector2(0.041259736, 0.04434714)
+color = Color(1, 1, 0, 1)
+energy = 0.28
+shadow_enabled = true
+texture = ExtResource("3_dyvm4")
+texture_scale = 4.51
+
+[node name="PointLight2D4" type="PointLight2D" parent="Sprite2D" unique_id=43433498]
+position = Vector2(-9.000002, 9.000006)
+scale = Vector2(0.041259736, 0.04434714)
+color = Color(1, 1, 0, 1)
+energy = 0.28
+shadow_enabled = true
+texture = ExtResource("3_dyvm4")
+texture_scale = 4.51
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
