@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bpkwbl76jf1ps"]
+
+[ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://icon.svg" id="1_f50pn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
+size = Vector2(190.5, 126.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f50pn"]
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1216632362]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1002494595]
+position = Vector2(-2, 5)
+texture = ExtResource("1_f50pn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=758679518]
+position = Vector2(29.75, 4.75)
+shape = SubResource("RectangleShape2D_ij6vw")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1139643452]
+position = Vector2(-2, 5)
+occluder = SubResource("OccluderPolygon2D_f50pn")

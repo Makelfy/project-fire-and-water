@@ -27,6 +27,12 @@ func _ready() -> void:
 		timer.timeout.connect(_on_timer_timeout)
 
 
+<<<<<<< HEAD
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+=======
 func _physics_process(delta: float) -> void:
 	player1_firable = can_shoot_player(player1, player1_raycast)
 	player2_firable = can_shoot_player(player2, player2_raycast)
@@ -94,3 +100,4 @@ func _on_body_entered(body: Node2D) -> void:
 		body.start_timer()
 		if body.has_method("apply_knockback"):
 			body.apply_knockback(global_position)
+>>>>>>> main

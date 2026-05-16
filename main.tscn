@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ddjui5oth8660"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_7dm0k"]
+
+[node name="Main" type="Node2D" unique_id=1951885342]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=65393815]
+color = Color(0.048384607, 0.084322415, 0.08841818, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=2123585814]
+energy = 2.35
+texture = SubResource("CurveTexture_7dm0k")
+texture_scale = 2.32
