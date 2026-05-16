@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cq4453rj5fqu"]
+[gd_scene format=3 uid="uid://drb5fwqdgypqh"]
 
 [ext_resource type="Script" uid="uid://rdk6e6blqqpx" path="res://scripts/player_1.gd" id="1_rfmnd"]
 [ext_resource type="Texture2D" uid="uid://bp4xrt1doedns" path="res://assets/images/player.jpg" id="2_gneq0"]
@@ -13,7 +13,6 @@ size = Vector2(82, 98)
 [node name="player1" type="CharacterBody2D" unique_id=1766431460 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_rfmnd")
-KNOCKBACK_FORCE = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=21099828]
 scale = Vector2(0.256, 0.256)
