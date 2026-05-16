@@ -18,6 +18,7 @@ var is_attacking = false
 var is_dead = false
 
 func _ready():
+	$AnimatedSprite2D.play("default")
 	$attack.hide()
 	$attack/CollisionShape2D.set_deferred("disabled", true)
 
@@ -50,6 +51,13 @@ func _physics_process(delta: float) -> void:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("left2", "right2")
+		if Input.is_action_just_pressed("left2") or Input.is_action_just_pressed("right2"):
+			$AnimatedSprite2D.play("WALK")
+		if (Input.is_action_just_released("left2") and not Input.is_action_pressed("right2")
+		) or (Input.is_action_just_released("right2") and not Input.is_action_pressed("left2")):
+			$AnimatedSprite2D.play("default")
+		
+
 		if direction:
 			$AnimatedSprite2D.flip_h = true
 			if(velocity.x == 0):
