@@ -8,7 +8,7 @@
 size = Vector2(104, 112)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vod78"]
-size = Vector2(58, 98)
+size = Vector2(82, 98)
 
 [node name="player1" type="CharacterBody2D" unique_id=1766431460 groups=["player"]]
 collision_layer = 2
@@ -30,15 +30,16 @@ one_shot = true
 [node name="attack" type="Area2D" parent="." unique_id=723697341]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack" unique_id=1133127597]
-position = Vector2(91, -1)
+position = Vector2(103, -1)
 shape = SubResource("RectangleShape2D_vod78")
 
 [node name="Sprite2D" type="Sprite2D" parent="attack" unique_id=75441210]
-position = Vector2(89, 1.9073486e-06)
-scale = Vector2(0.35937506, 0.75)
+position = Vector2(101, 1.9073486e-06)
+scale = Vector2(0.546875, 0.75)
 texture = ExtResource("3_f7tsm")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=705868225]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="attack" to="." method="_on_attack_area_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

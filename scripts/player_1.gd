@@ -14,8 +14,8 @@ var knockback_time_left = 0.0
 var is_attacking = false
 
 func _ready():
-	$attack/CollisionShape2D.set_deferred("disabled", true)
 	$attack.hide()
+	$attack/CollisionShape2D.set_deferred("disabled", true)
 
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("attack") and not is_attacking):
@@ -83,7 +83,7 @@ func _on_timer_timeout() -> void:
 
 func _on_attack_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("enemy")):
-		pass
+		print("Enemy hit")
 
 
 func _on_attack_timer_timeout() -> void:
