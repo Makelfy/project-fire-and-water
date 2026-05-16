@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dl2a3jw3hlr8f"]
 
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="1_j8ivh"]
-[ext_resource type="PackedScene" uid="uid://cq4453rj5fqu" path="res://scenes/player_1.tscn" id="2_nd71p"]
+[ext_resource type="PackedScene" uid="uid://dhxnglxw875j3" path="res://scenes/player_1.tscn" id="2_nd71p"]
+[ext_resource type="Texture2D" uid="uid://orj71d5lbbyq" path="res://assets/images/background.jpg" id="3_nd71p"]
+[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_7ddre"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ddre"]
 
@@ -11,8 +13,17 @@ position = Vector2(560, 640)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=295182384]
 shape = SubResource("WorldBoundaryShape2D_7ddre")
 
-[node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("1_j8ivh")]
-position = Vector2(320, -176)
-
 [node name="player1" parent="." unique_id=962409094 instance=ExtResource("2_nd71p")]
 position = Vector2(-144, -152)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1789583880]
+z_index = -2
+position = Vector2(16.000122, -316)
+scale = Vector2(0.25599992, 0.21066669)
+texture = ExtResource("3_nd71p")
+
+[node name="player2" parent="." unique_id=845546760 instance=ExtResource("4_7ddre")]
+position = Vector2(-352, -152)
+
+[node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("1_j8ivh")]
+position = Vector2(352, -200)
