@@ -11,7 +11,7 @@ height = 134.40894
 scale = Vector2(0.23864867, 0.41318554)
 collision_mask = 7
 script = ExtResource("1_y25gk")
-SPEED = 1
+SPEED = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=346791140]
 scale = Vector2(1.4964219, 1.3558415)
