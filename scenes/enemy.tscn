@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbri65q50s534"]
 
-[ext_resource type="Script" path="res://scripts/Knockback.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://o2pvt3elak5l" path="res://scripts/Knockback.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="3_4ra3w"]
 
@@ -20,12 +20,23 @@ position = Vector2(0, -2)
 scale = Vector2(3, 3)
 texture = ExtResource("2_4ra3w")
 
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=1001041113]
+position = Vector2(0.054230954, -2.447012)
+scale = Vector2(0.0017023658, 0.001966669)
+color = Color(1, 1, 0, 1)
+energy = 2.85
+shadow_enabled = true
+texture = ExtResource("3_4ra3w")
+texture_scale = 19.14
+
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=1020277725]
+visible = false
 position = Vector2(0.05208206, -2.3431022)
 scale = Vector2(0.041259736, 0.04434714)
 color = Color(1, 1, 0, 1)
-energy = 16.0
+energy = 0.28
 shadow_enabled = true
 texture = ExtResource("3_4ra3w")
+texture_scale = 4.51
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
