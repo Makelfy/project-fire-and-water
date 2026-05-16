@@ -18,6 +18,7 @@ polygon = PackedVector2Array(0, 648, 1152, 648, 1152, 0, 0, 0)
 
 [node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("1_o5qli")]
 position = Vector2(283, 310)
+Distance = 400.0
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=194177348]
 position = Vector2(108.00006, 733)
