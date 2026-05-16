@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var HEALTH = Config.PLAYER_HEALTH
 
 const MAX_SPEED = 500.0
 const SPEED = 300.0
@@ -12,8 +13,15 @@ const KNOCKBACK_DURATION = 0.18
 const KNOCKBACK_FRICTION = 1800.0
 
 var knockback_time_left = 0.0
+var damage_cooldown = false
+var is_dead = false
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += 1.5 * get_gravity() * delta
@@ -44,7 +52,44 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func handle_death() -> void:
+	if is_dead:
+		return
+
+	is_dead = true
+	velocity = Vector2.ZERO
+	knockback_time_left = 0.0
+
+	var scene_root := get_tree().current_scene if get_tree().current_scene != null else get_parent()
+	var canvas_layer := scene_root.get_node_or_null("CanvasLayer")
+	var game_over_scene := canvas_layer.get_node_or_null("GameOverScene")
+	if game_over_scene:
+		canvas_layer.visible = true
+
+	get_tree().paused = true
+
+
+func take_damage(damage: float) -> void:
+	if is_dead:
+		return
+
+	print("damage")
+	if not damage_cooldown:
+		damage_cooldown = true
+		HEALTH -= damage
+		if HEALTH <= 0:
+			handle_death()
+		await get_tree().create_timer(1).timeout
+		damage_cooldown = false
+
+
 func apply_knockback(source_position: Vector2) -> void:
+	if is_dead:
+		return
+
+	var sprite = $Sprite2D
+	sprite.modulate = Color(HEALTH/100, 0.0, 0.0, 1.0)
+
 	var knockback_direction := global_position - source_position
 	if knockback_direction.length_squared() == 0.0:
 		knockback_direction = Vector2.LEFT if velocity.x <= 0.0 else Vector2.RIGHT

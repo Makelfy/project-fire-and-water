@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://djul02odexf1a"]
+
+[node name="Node2D" type="Label" unique_id=424395440]
+offset_left = 200.0
+offset_top = 248.0
+offset_right = 960.0
+offset_bottom = 448.0
+theme_override_font_sizes/font_size = 90
+text = "YOU DIED"
+horizontal_alignment = 1
+vertical_alignment = 1
