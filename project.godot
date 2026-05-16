@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="brotato_v2.0"
-run/main_scene="uid://dg16quis6wh6g"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/images/icon.svg"
 
@@ -25,6 +25,8 @@ Config="*uid://p4f8r21g71p3"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/mode=3
 window/stretch/mode="viewport"
 

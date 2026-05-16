@@ -13,6 +13,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if Distance <= 0:
+		return
+	
 	if abs(default_position_x - global_position.x) <= Distance:
 		global_position.x += SPEED * delta * direction
 		return

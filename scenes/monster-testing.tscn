@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://dg16quis6wh6g"]
+[gd_scene format=3 uid="uid://dowjx03es1sc"]
 
 [ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="1_8i7lx"]
 [ext_resource type="Script" uid="uid://drwh624jcaes3" path="res://scripts/monster.gd" id="1_385sv"]
 [ext_resource type="PackedScene" uid="uid://cykrfm76nmcrb" path="res://scenes/bullet.tscn" id="2_378s4"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="2_385sv"]
-[ext_resource type="PackedScene" path="res://scenes/player_2.tscn" id="4_ehaeo"]
-[ext_resource type="PackedScene" path="res://scenes/player_1.tscn" id="4_k6137"]
+[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_ehaeo"]
+[ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="4_k6137"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehaeo"]
 height = 36.0
@@ -15,18 +15,18 @@ size = Vector2(20, 134)
 
 [node name="MonsterTesting" type="Node2D" unique_id=1824821853]
 
-[node name="Monster" type="RigidBody2D" parent="." unique_id=2022828183 node_paths=PackedStringArray("player1", "player2")]
+[node name="Monster" type="Area2D" parent="." unique_id=1634168666 node_paths=PackedStringArray("player1", "player2")]
 position = Vector2(843, 407.99997)
 scale = Vector2(1.04, 0.76)
-gravity_scale = 0.0
+collision_mask = 7
 script = ExtResource("1_385sv")
+bullet = ExtResource("2_378s4")
 player1 = NodePath("../player1")
 player2 = NodePath("../player2")
-bullet = ExtResource("2_378s4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1347981985]
+scale = Vector2(1.0769418, 1)
 shape = SubResource("CapsuleShape2D_ehaeo")
-disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Monster" unique_id=5055778]
 position = Vector2(0, -5.2631836)
@@ -34,8 +34,11 @@ scale = Vector2(0.48355272, 1.027993)
 texture = ExtResource("1_8i7lx")
 
 [node name="Player1Raycast" type="RayCast2D" parent="Monster" unique_id=2084188514]
+collision_mask = 7
 
 [node name="Player2Raycast" type="RayCast2D" parent="Monster" unique_id=1704649301]
+position = Vector2(0, 4.0154708e-05)
+collision_mask = 7
 
 [node name="Area2D" type="StaticBody2D" parent="." unique_id=1917967332]
 position = Vector2(530, 589)
@@ -49,19 +52,26 @@ shape = SubResource("RectangleShape2D_378s4")
 [node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1176426714]
 texture = ExtResource("2_385sv")
 
-[node name="player2" parent="." unique_id=2103974204 instance=ExtResource("4_ehaeo")]
-position = Vector2(693, 299)
+[node name="Area2D2" type="StaticBody2D" parent="." unique_id=1221046013]
+position = Vector2(1080, 324)
+scale = Vector2(1.188124, 7.491109)
 
-[node name="Sprite2D2" type="Sprite2D" parent="player2" unique_id=728390750]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1695449665]
+position = Vector2(0, -3)
+scale = Vector2(6.400005, 1)
+shape = SubResource("RectangleShape2D_378s4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2" unique_id=1840310463]
 texture = ExtResource("2_385sv")
+
+[node name="player2" parent="." unique_id=2103974204 instance=ExtResource("4_ehaeo")]
+position = Vector2(51, 364)
 
 [node name="player1" parent="." unique_id=1806469487 instance=ExtResource("4_k6137")]
-position = Vector2(309, 360)
-
-[node name="Sprite2D2" type="Sprite2D" parent="player1" unique_id=1767958325]
-texture = ExtResource("2_385sv")
+position = Vector2(441, 377)
 
 [node name="Timer" type="Timer" parent="." unique_id=1370093535]
 autostart = true
 
+[connection signal="body_entered" from="Monster" to="Monster" method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="Monster" method="_on_timer_timeout"]
