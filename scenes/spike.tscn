@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bh6m1ek5wcrh7"]
+
+[ext_resource type="Script" uid="uid://c60ory7xqau12" path="res://scripts/spike.gd" id="1_ljd5v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7a7y0"]
+size = Vector2(48, 40)
+
+[node name="Spike" type="Area2D" unique_id=497970394]
+position = Vector2(224, 168)
+collision_mask = 7
+script = ExtResource("1_ljd5v")
+
+[node name="SpikePolygon" type="Polygon2D" parent="." unique_id=1761759734]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-32, 24, -16, 24, -24, -32)
+
+[node name="SpikePolygon3" type="Polygon2D" parent="." unique_id=278004538]
+position = Vector2(16, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-32, 24, -16, 24, -24, -32)
+
+[node name="SpikePolygon2" type="Polygon2D" parent="." unique_id=818871750]
+position = Vector2(32, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-32, 24, -16, 24, -24, -32)
+
+[node name="SpikePolygon4" type="Polygon2D" parent="." unique_id=65515686]
+position = Vector2(48, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-32, 24, -16, 24, -24, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1405752992]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_7a7y0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

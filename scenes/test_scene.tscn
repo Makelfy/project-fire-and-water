@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="5_qjeyg"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="6_canvas"]
 [ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="7_gameover"]
-[ext_resource type="PackedScene" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
+[ext_resource type="PackedScene" uid="uid://ctl5h63pnluex" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
+[ext_resource type="PackedScene" uid="uid://bh6m1ek5wcrh7" path="res://scenes/spike.tscn" id="9_h3xc6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ddre"]
 
@@ -127,5 +128,8 @@ text = "RESTART"
 [node name="FlyingEnemy" parent="." unique_id=1774007836 instance=ExtResource("8_rnaij")]
 z_index = 3
 position = Vector2(-48, -111)
+
+[node name="Spike" parent="." unique_id=497970394 instance=ExtResource("9_h3xc6")]
+position = Vector2(-16, -55)
 
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]
