@@ -52,6 +52,24 @@ shape = SubResource("RectangleShape2D_378s4")
 [node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1176426714]
 texture = ExtResource("2_385sv")
 
+[node name="Area2D2" type="StaticBody2D" parent="." unique_id=1221046013]
+position = Vector2(1080, 324)
+scale = Vector2(1.188124, 7.491109)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1695449665]
+position = Vector2(0, -3)
+scale = Vector2(6.400005, 1)
+shape = SubResource("RectangleShape2D_378s4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2" unique_id=1840310463]
+texture = ExtResource("2_385sv")
+
+[node name="player2" parent="." unique_id=2103974204 instance=ExtResource("4_ehaeo")]
+position = Vector2(51, 364)
+
+[node name="player1" parent="." unique_id=1806469487 instance=ExtResource("4_k6137")]
+position = Vector2(441, 377)
+
 [node name="Timer" type="Timer" parent="." unique_id=1370093535]
 autostart = true
 

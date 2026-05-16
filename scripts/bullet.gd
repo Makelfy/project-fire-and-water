@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var SPEED = 100
+@export var SPEED = 200 
 
 var dir: Vector2
 var spawnPos: Vector2
@@ -12,10 +12,13 @@ func _ready():
 	global_rotation = spawnRot
 	z_index = zDex
 	
+	get_tree().create_timer(5.0).timeout.connect(queue_free)
+
 func _physics_process(delta):
-	global_position += -delta*SPEED*dir
+	global_position += dir * SPEED * delta
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("hit")
-		queue_free()
+		print("Hit Player!")
+		
+	queue_free()

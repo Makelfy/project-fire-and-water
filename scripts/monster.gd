@@ -1,6 +1,8 @@
 extends Area2D
 
 @onready var main = $".."
+@onready var raycast_1 = $Player1Raycast
+@onready var raycast_2 = $Player2Raycast
 
 @export var player1: CharacterBody2D
 @export var player2: CharacterBody2D
@@ -11,8 +13,6 @@ extends Area2D
 
 var player1_firable: bool = false
 var player2_firable: bool = false
-var time: int = 3
-var isShooting:bool = false
 
 
 func _ready() -> void:
@@ -31,11 +31,12 @@ func _physics_process(delta: float) -> void:
 	player1_firable = can_shoot_player(player1, player1_raycast)
 	player2_firable = can_shoot_player(player2, player2_raycast)
 
-	if player1_firable or player2_firable:
-		isShooting = true
+	if player2:
+		raycast_2.target_position = to_local(player2.global_position)
+		raycast_2.force_raycast_update()
+		player2_firable = (raycast_2.get_collider() == player2)
 	else:
-		isShooting = false
-
+		player2_firable = false
 
 func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
 	if player == null:
@@ -60,13 +61,23 @@ func shoot(player):
 		instance.zDex = z_index - 1
 		main.add_child.call_deferred(instance)
 	
-func _on_timer_timeout() -> void:
+	instance.spawnPos = global_position 
+	instance.spawnRot = rotation
+	instance.zDex = z_index - 1
+	
+	main.add_child.call_deferred(instance)
 
+func _on_timer_timeout() -> void:
+	
 	if player1_firable and player2_firable:
-		if player1.global_position.distance_to(global_position) < player2.global_position.distance_to(global_position):
+		var dist1 = global_position.distance_squared_to(player1.global_position)
+		var dist2 = global_position.distance_squared_to(player2.global_position)
+		
+		if dist1 < dist2:
 			shoot(player1)
 		else:
 			shoot(player2)
+			
 	elif player1_firable:
 		shoot(player1)
 	elif player2_firable:
