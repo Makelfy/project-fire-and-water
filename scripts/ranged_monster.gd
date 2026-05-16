@@ -11,7 +11,6 @@ extends Area2D
 
 var player1_firable: bool = false
 var player2_firable: bool = false
-var time: int = 3
 var isShooting: bool = false
 
 
@@ -31,8 +30,8 @@ func _physics_process(delta: float) -> void:
 	player1_firable = can_shoot_player(player1, player1_raycast)
 	player2_firable = can_shoot_player(player2, player2_raycast)
 
-	isShooting = player1_firable or player2_firable
-
+	print(player1_firable)
+	print(player2_firable)
 func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
 	if player == null:
 		return false
@@ -44,20 +43,18 @@ func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
 
 
 func shoot(player):
+	print("shoot")
 	if bullet == null:
 		return
 
-	isShooting = true
-	if time == 3:
-		var instance = bullet.instantiate()
-		instance.dir = (player.global_position - global_position).normalized()
-		instance.spawnPos = global_position + Vector2(30, 30)
-		instance.spawnRot = rotation
-		instance.zDex = z_index - 1
-		main.add_child.call_deferred(instance)
+	var instance = bullet.instantiate()
+	instance.dir = (player.global_position - global_position).normalized()
+	instance.spawnPos = global_position
+	instance.spawnRot = rotation
+	instance.zDex = z_index - 1
+	main.add_child.call_deferred(instance)
 
 func _on_timer_timeout() -> void:
-	
 	if player1_firable and player2_firable:
 		var dist1 = global_position.distance_squared_to(player1.global_position)
 		var dist2 = global_position.distance_squared_to(player2.global_position)
@@ -71,26 +68,17 @@ func _on_timer_timeout() -> void:
 		shoot(player1)
 	elif player2_firable:
 		shoot(player2)
-	
-	if isShooting:
-		if time < 0:
-			time = 3
-		else:
-			time -= 1
-	else:
-		if time > 0 and time != 3:
-			time -= 1
-		else:
-			time = 3
-
-	
-	print(time)
-
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		var sprite = body.get_child(0)
+	if not body.is_in_group("player"):
+		return
+
+	var sprite := body.get_child(0) as Sprite2D
+	if sprite:
 		sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
+
+	if body.has_method("start_timer"):
 		body.start_timer()
-		if body.has_method("apply_knockback"):
-			body.apply_knockback(global_position)
+
+	if body.has_method("apply_knockback"):
+		body.apply_knockback(global_position)

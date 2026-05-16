@@ -1,45 +1,20 @@
 [gd_scene format=3 uid="uid://dg16quis6wh6g"]
 
-[ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="1_8i7lx"]
-[ext_resource type="Script" uid="uid://drwh624jcaes3" path="res://scripts/monster.gd" id="1_385sv"]
-[ext_resource type="PackedScene" uid="uid://cykrfm76nmcrb" path="res://scenes/bullet.tscn" id="2_378s4"]
+[ext_resource type="PackedScene" uid="uid://ba3nunuuf1ek" path="res://scenes/ranged_monster.tscn" id="1_ehaeo"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="2_385sv"]
 [ext_resource type="PackedScene" path="res://scenes/player_2.tscn" id="4_ehaeo"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="4_k6137"]
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="7_51sjs"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehaeo"]
-height = 36.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_378s4"]
 size = Vector2(20, 134)
 
 [node name="MonsterTesting" type="Node2D" unique_id=1824821853]
 
-[node name="Monster" type="Area2D" parent="." unique_id=1634168666 node_paths=PackedStringArray("player1", "player2")]
-position = Vector2(843, 407.99997)
-scale = Vector2(1.04, 0.76)
-collision_mask = 7
-script = ExtResource("1_385sv")
+[node name="RangedMonster" parent="." unique_id=1576581175 node_paths=PackedStringArray("player1", "player2") instance=ExtResource("1_ehaeo")]
+position = Vector2(944, 473)
 player1 = NodePath("../player1")
 player2 = NodePath("../player2")
-bullet = ExtResource("2_378s4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1347981985]
-scale = Vector2(1.0769418, 1)
-shape = SubResource("CapsuleShape2D_ehaeo")
-
-[node name="Sprite2D" type="Sprite2D" parent="Monster" unique_id=5055778]
-position = Vector2(0, -5.2631836)
-scale = Vector2(0.48355272, 1.027993)
-texture = ExtResource("1_8i7lx")
-
-[node name="Player1Raycast" type="RayCast2D" parent="Monster" unique_id=2084188514]
-collision_mask = 7
-
-[node name="Player2Raycast" type="RayCast2D" parent="Monster" unique_id=1704649301]
-position = Vector2(0, 4.0154708e-05)
-collision_mask = 7
 
 [node name="Area2D" type="StaticBody2D" parent="." unique_id=1917967332]
 position = Vector2(530, 589)
@@ -71,12 +46,6 @@ position = Vector2(51, 364)
 [node name="player1" parent="." unique_id=1806469487 instance=ExtResource("4_k6137")]
 position = Vector2(441, 377)
 
-[node name="Timer" type="Timer" parent="." unique_id=1370093535]
-autostart = true
-
 [node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("7_51sjs")]
 position = Vector2(686, 426)
 Distance = 400.0
-
-[connection signal="body_entered" from="Monster" to="Monster" method="_on_body_entered"]
-[connection signal="timeout" from="Timer" to="Monster" method="_on_timer_timeout"]
