@@ -11,6 +11,16 @@ const KNOCKBACK_FRICTION = 1800.0
 
 var knockback_time_left = 0.0
 
+var is_attacking = false
+
+func _ready():
+	$attack/CollisionShape2D.set_deferred("disabled", true)
+	$attack.hide()
+
+func _process(delta: float) -> void:
+	if(Input.is_action_just_pressed("attack") and not is_attacking):
+		start_attack()
+		
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -35,11 +45,23 @@ func _physics_process(delta: float) -> void:
 				velocity.x += direction*ACC
 			else:
 				velocity.x = direction * MAX_SPEED
+			$attack/Sprite2D.flip_h = false if direction == -1 else true
+			$attack.position.x = -192 if velocity.x < 0 else 0 
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 
 	move_and_slide()
+
+func start_attack():
+	is_attacking = true
+	$AttackTimer.start()
+	$attack.show()
+	$attack/CollisionShape2D.set_deferred("disabled", false)
+	await get_tree().create_timer(0.1).timeout
+	$attack/CollisionShape2D.set_deferred("disabled", true)
+	$attack.hide()
+	
 
 
 func apply_knockback(source_position: Vector2) -> void:
@@ -57,3 +79,12 @@ func start_timer():
 
 func _on_timer_timeout() -> void:
 	$Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+func _on_attack_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("enemy")):
+		pass
+
+
+func _on_attack_timer_timeout() -> void:
+	is_attacking = false

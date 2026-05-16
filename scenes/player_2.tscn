@@ -1,25 +1,26 @@
 [gd_scene format=3 uid="uid://bh8t3lwtdxfk6"]
 
-[ext_resource type="Script" path="res://scripts/player_2.gd" id="1_l6tho"]
+[ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xjnt"]
-size = Vector2(128, 128)
+size = Vector2(112, 112)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8xjnt"]
 radius = 384.083
 
-[node name="player2" type="CharacterBody2D"]
+[node name="player2" type="CharacterBody2D" unique_id=235696546]
 collision_layer = 4
 script = ExtResource("1_l6tho")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1535955259]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1979250712]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_8xjnt")
 
-[node name="Flashlight" type="Area2D" parent="." groups=["player"]]
+[node name="Flashlight" type="Area2D" parent="." unique_id=1018748186 groups=["player"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flashlight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flashlight" unique_id=855390878]
 shape = SubResource("CircleShape2D_8xjnt")
 
 [connection signal="area_entered" from="Flashlight" to="." method="_on_flashlight_area_entered"]
