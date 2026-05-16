@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 var HEALTH = Config.PLAYER_HEALTH
 
-const MAX_SPEED = 500.0
-const SPEED = 300.0
+var MAX_SPEED = Config.PLAYER_MAX_SPEED
+var SPEED = Config.PLAYER_SPEED
 const ACC = 20.0
-const JUMP_VELOCITY = -700.0
+var JUMP_VELOCITY = Config.PLAYER_JUMP_FORCE
 
 # Knockback parameters
-@export var KNOCKBACK_FORCE = 650.0
+@export var KNOCKBACK_FORCE = 300
 const KNOCKBACK_DURATION = 0.18
 const KNOCKBACK_FRICTION = 1800.0
 
@@ -62,9 +62,11 @@ func handle_death() -> void:
 
 	var scene_root := get_tree().current_scene if get_tree().current_scene != null else get_parent()
 	var canvas_layer := scene_root.get_node_or_null("CanvasLayer")
-	var game_over_scene := canvas_layer.get_node_or_null("GameOverScene")
-	if game_over_scene:
+	if canvas_layer:
 		canvas_layer.visible = true
+		var game_over_scene := canvas_layer.get_node_or_null("GameOverScene")
+		if game_over_scene:
+			game_over_scene.visible = true
 
 	get_tree().paused = true
 

@@ -33,7 +33,7 @@ texture = ExtResource("3_nd71p")
 position = Vector2(-352, -152)
 
 [node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("1_j8ivh")]
-position = Vector2(352, -200)
+position = Vector2(216, -72)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=662595240]
 process_mode = 3
