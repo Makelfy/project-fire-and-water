@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ba3nunuuf1ek"]
+
+[ext_resource type="Script" uid="uid://drwh624jcaes3" path="res://scripts/ranged_monster.gd" id="1_rwvi7"]
+[ext_resource type="PackedScene" uid="uid://cykrfm76nmcrb" path="res://scenes/bullet.tscn" id="2_4xx58"]
+[ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_yb8kd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4xx58"]
+height = 36.0
+
+[node name="RangedMonster" type="Area2D" unique_id=1576581175 groups=["enemy"]]
+collision_mask = 7
+script = ExtResource("1_rwvi7")
+bullet = ExtResource("2_4xx58")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=316910807]
+shape = SubResource("CapsuleShape2D_4xx58")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=779214289]
+texture = ExtResource("2_yb8kd")
+
+[node name="Player1Raycast" type="RayCast2D" parent="." unique_id=382995108]
+collision_mask = 6
+
+[node name="Player2Raycast" type="RayCast2D" parent="." unique_id=998144508]
+collision_mask = 6
+
+[node name="Timer" type="Timer" parent="." unique_id=643343213]
+wait_time = 3.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
