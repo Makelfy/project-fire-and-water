@@ -41,7 +41,8 @@ func _physics_process(delta: float) -> void:
 
 		if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
 			$AnimatedSprite2D.play("WALK")
-		if (Input.is_action_just_released("ui_left") and Input.is_action_pressed("ui_right")) or (Input.is_action_just_released("ui_right") and Input.is_action_pressed("ui_left")):
+		if (Input.is_action_just_released("ui_left") and not Input.is_action_pressed("ui_right")
+		) or (Input.is_action_just_released("ui_right") and not Input.is_action_pressed("ui_left")):
 			$AnimatedSprite2D.play("default")
 		
 		if direction:
