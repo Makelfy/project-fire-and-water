@@ -6,6 +6,8 @@ const SPEED = 150
 
 var start_pos_x: float
 var direction: int = 1
+var HEALTH = 2
+var is_damagable := false 
 
 func _ready() -> void:
 	# Save the initial starting position
@@ -28,6 +30,7 @@ func _physics_process(delta: float) -> void:
 	elif global_position.x <= start_pos_x - Distance:
 		direction = 1
 		_update_sprite()
+	print(is_damagable)
 
 # Extracted sprite logic to a helper function to keep the physics process clean
 func _update_sprite() -> void:
@@ -44,3 +47,12 @@ func _on_body_entered(body: Node2D) -> void:
 
 		if body.has_method("apply_knockback"):
 			body.apply_knockback(global_position)
+
+func take_damage():
+	if is_damagable:
+		HEALTH -= 1
+	if HEALTH <= 0:
+		queue_free()
+
+func set_damagable(val):
+	is_damagable = val

@@ -13,6 +13,8 @@ var player1_firable: bool = false
 var player2_firable: bool = false
 var isShooting: bool = false
 
+var HEALTH = 2
+var is_damagable := false
 
 func _ready() -> void:
 	player1_raycast.enabled = true
@@ -30,8 +32,6 @@ func _physics_process(delta: float) -> void:
 	player1_firable = can_shoot_player(player1, player1_raycast)
 	player2_firable = can_shoot_player(player2, player2_raycast)
 
-	print(player1_firable)
-	print(player2_firable)
 func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
 	if player == null:
 		return false
@@ -43,7 +43,6 @@ func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
 
 
 func shoot(player):
-	print("shoot")
 	if bullet == null:
 		return
 
@@ -82,3 +81,12 @@ func _on_body_entered(body: Node2D) -> void:
 
 	if body.has_method("apply_knockback"):
 		body.apply_knockback(global_position)
+
+func take_damage():
+	if is_damagable:
+		HEALTH -= 1
+	if HEALTH <= 0:
+		queue_free()
+
+func set_damagable(val):
+	is_damagable = val

@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("left2", "right2")
-		if Input.is_action_just_pressed("left2") or Input.is_action_just_pressed("right2"):
+		if Input.is_action_just_pressed("left2") or Input.is_action_just_pressed("right2") and not is_attacking:
 			$AnimatedSprite2D.play("WALK")
 		if (Input.is_action_just_released("left2") and not Input.is_action_pressed("right2")
 		) or (Input.is_action_just_released("right2") and not Input.is_action_pressed("left2")):
@@ -106,7 +106,6 @@ func take_damage(damage: float) -> void:
 	if is_dead:
 		return
 
-	print("damage")
 	if not damage_cooldown:
 		damage_cooldown = true
 		HEALTH -= damage
@@ -129,7 +128,6 @@ func apply_knockback(source_position: Vector2) -> void:
 		knockback_direction = knockback_direction.normalized()
 
 	velocity = knockback_direction * KNOCKBACK_FORCE
-	print(velocity)
 	knockback_time_left = KNOCKBACK_DURATION
 
 func start_timer():
@@ -141,8 +139,7 @@ func _on_timer_timeout() -> void:
 
 func _on_attack_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("enemy")):
-		print("Enemy hit")
-
+		area.take_damage()
 
 func _on_attack_timer_timeout() -> void:
 	is_attacking = false
