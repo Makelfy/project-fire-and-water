@@ -16,6 +16,7 @@ var knockback_time_left = 0.0
 var damage_cooldown = false
 var is_dead = false
 
+
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		velocity = Vector2.ZERO
@@ -29,7 +30,6 @@ func _physics_process(delta: float) -> void:
 	if knockback_time_left > 0.0:
 		knockback_time_left -= delta
 		velocity.x = move_toward(velocity.x, 0, KNOCKBACK_FRICTION * delta)
-	
 	else:
 		# Handle jump.
 		if Input.is_action_just_pressed("up1") and is_on_floor():
@@ -38,20 +38,26 @@ func _physics_process(delta: float) -> void:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("ui_left", "ui_right")
+
+		if Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
+			$AnimatedSprite2D.play("WALK")
+		if (Input.is_action_just_released("ui_left") and Input.is_action_pressed("ui_right")) or (Input.is_action_just_released("ui_right") and Input.is_action_pressed("ui_left")):
+			$AnimatedSprite2D.play("default")
+		
 		if direction:
+			$AnimatedSprite2D.flip_h = true
 			if(velocity.x == 0):
 				velocity.x = direction * SPEED
 			elif(velocity.x < MAX_SPEED and velocity.x > -MAX_SPEED):
 				velocity.x += direction*ACC
 			else:
 				velocity.x = direction * MAX_SPEED
+			$AnimatedSprite2D.flip_h = direction == -1
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 
 	move_and_slide()
-
-
 func handle_death() -> void:
 	if is_dead:
 		return
@@ -111,3 +117,6 @@ func _on_timer_timeout() -> void:
 func _on_flashlight_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("enemy")):
 		pass
+
+func _ready():
+	$AnimatedSprite2D.play("default")
