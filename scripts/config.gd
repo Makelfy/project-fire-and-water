@@ -1,5 +1,9 @@
 extends Node
 
+var PLAYER_MAX_SPEED = 300
+var PLAYER_SPEED = 200
+var PLAYER_JUMP_FORCE = -500
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

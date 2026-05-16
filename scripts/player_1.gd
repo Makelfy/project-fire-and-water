@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
 
-const MAX_SPEED = 500.0
-const SPEED = 300.0
+var MAX_SPEED = Config.PLAYER_MAX_SPEED
+var SPEED = Config.PLAYER_SPEED
 const ACC = 20.0
-const JUMP_VELOCITY = -700.0
+var JUMP_VELOCITY = Config.PLAYER_JUMP_FORCE
 
 # Knockback parameters
-@export var KNOCKBACK_FORCE = 650.0
+@export var KNOCKBACK_FORCE = 300
 const KNOCKBACK_DURATION = 0.18
 const KNOCKBACK_FRICTION = 1800.0
 
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = direction * MAX_SPEED
 			$attack/Sprite2D.flip_h = false if direction == -1 else true
-			$attack.position.x = -192 if velocity.x < 0 else 0 
+			$attack.position.x = -88 if velocity.x < 0 else 0 
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		

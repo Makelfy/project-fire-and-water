@@ -5,22 +5,24 @@
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="3_f7tsm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxx23"]
-size = Vector2(104, 112)
+size = Vector2(48, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vod78"]
-size = Vector2(82, 98)
+size = Vector2(50, 64)
 
 [node name="player1" type="CharacterBody2D" unique_id=1766431460 groups=["player"]]
+position = Vector2(66, -64)
 collision_layer = 2
 script = ExtResource("1_rfmnd")
-KNOCKBACK_FORCE = 1000.0
+KNOCKBACK_FORCE = 400
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=21099828]
-scale = Vector2(0.256, 0.256)
+position = Vector2(-34, 31.999998)
+scale = Vector2(0.128, 0.12799999)
 texture = ExtResource("2_gneq0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890329774]
-position = Vector2(-4, 8)
+position = Vector2(-34, 36)
 shape = SubResource("RectangleShape2D_bxx23")
 
 [node name="Timer" type="Timer" parent="." unique_id=1677668276]
@@ -28,14 +30,15 @@ wait_time = 3.0
 one_shot = true
 
 [node name="attack" type="Area2D" parent="." unique_id=723697341]
+position = Vector2(22, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack" unique_id=1133127597]
-position = Vector2(103, -1)
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_vod78")
 
 [node name="Sprite2D" type="Sprite2D" parent="attack" unique_id=75441210]
-position = Vector2(101, 1.9073486e-06)
-scale = Vector2(0.546875, 0.75)
+position = Vector2(8.000002, 0)
+scale = Vector2(0.29687515, 0.49999997)
 texture = ExtResource("3_f7tsm")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=705868225]
