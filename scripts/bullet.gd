@@ -18,7 +18,12 @@ func _physics_process(delta):
 	global_position += dir * SPEED * delta
 
 func _on_body_entered(body: Node2D) -> void:
+	print("hit player")
 	if body.is_in_group("player"):
-		print("Hit Player!")
+		var sprite = body.get_child(0)
+		sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
+		body.start_timer()
+		if body.has_method("apply_knockback"):
+			body.apply_knockback(global_position)
 		
 	queue_free()
