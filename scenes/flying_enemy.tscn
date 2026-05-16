@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ctl5h63pnluex"]
+[gd_scene format=3 uid="uid://bvmjmb4y3q1gy"]
 
 [ext_resource type="Script" uid="uid://dg36vct6kl7rx" path="res://scripts/flying_enemy.gd" id="1_lrtul"]
 [ext_resource type="Texture2D" uid="uid://1l6gcsaju5b7" path="res://assets/images/flying_enemy.png" id="2_dyvm4"]

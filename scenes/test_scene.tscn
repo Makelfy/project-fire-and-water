@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="5_qjeyg"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="6_canvas"]
 [ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="7_gameover"]
-[ext_resource type="PackedScene" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
+[ext_resource type="PackedScene" uid="uid://bvmjmb4y3q1gy" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ddre"]
 

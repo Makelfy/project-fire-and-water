@@ -96,7 +96,7 @@ func apply_knockback(source_position: Vector2) -> void:
 		return
 
 	var sprite = $AnimatedSprite2D
-	sprite.modulate = Color(HEALTH/100, 0.0, 0.0, 1.0)
+	sprite.modulate = Color(HEALTH/100, HEALTH/160, HEALTH/160, 1.0)
 
 	var knockback_direction := global_position - source_position
 	if knockback_direction.length_squared() == 0.0:
@@ -108,10 +108,7 @@ func apply_knockback(source_position: Vector2) -> void:
 	knockback_time_left = KNOCKBACK_DURATION
 
 func start_timer():
-	$Timer.start()
-
-func _on_timer_timeout() -> void:
-	$AnimatedSprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	pass
 
 func _on_flashlight_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("enemy")):
@@ -122,4 +119,6 @@ func _on_flashlight_area_exited(area: Area2D) -> void:
 		area.set_damagable(false)
 	
 func _ready():
+	HEALTH = Config.PLAYER_HEALTH
+	$AnimatedSprite2D.modulate = Color(1, 1, 1, 1.0)
 	$AnimatedSprite2D.play("default")
