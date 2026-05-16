@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d37d6bis83max"]
+
+[ext_resource type="Script" uid="uid://dyhxn5qof046d" path="res://scripts/mole.gd" id="1_4qimr"]
+[ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="2_0o2lx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0o2lx"]
+height = 28.578262
+
+[node name="Mole" type="Area2D" unique_id=464048357 groups=["enemy"]]
+collision_mask = 7
+script = ExtResource("1_4qimr")
+dig_distance = Vector2(0, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=650057550]
+scale = Vector2(2.2168922, 1.2397982)
+shape = SubResource("CapsuleShape2D_0o2lx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2030309839]
+scale = Vector2(0.35121575, 0.2932161)
+texture = ExtResource("2_0o2lx")
+
+[node name="Timer" type="Timer" parent="." unique_id=887633604]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
