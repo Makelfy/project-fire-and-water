@@ -18,6 +18,8 @@ var is_attacking = false
 var is_dead = false
 
 func _ready():
+	HEALTH = Config.PLAYER_HEALTH
+	$AnimatedSprite2D.modulate = Color(1, 1, 1, 1.0)
 	$AnimatedSprite2D.play("default")
 	$attack.hide()
 	$attack/CollisionShape2D.set_deferred("disabled", true)
@@ -53,8 +55,8 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("left2", "right2")
 		if Input.is_action_just_pressed("left2") or Input.is_action_just_pressed("right2") and not is_attacking:
 			$AnimatedSprite2D.play("WALK")
-		if (Input.is_action_just_released("left2") and not Input.is_action_pressed("right2")
-		) or (Input.is_action_just_released("right2") and not Input.is_action_pressed("left2")):
+		if (Input.is_action_just_released("left2") and not Input.is_action_pressed("right2") 
+		) or (Input.is_action_just_released("right2") and not Input.is_action_pressed("left2")) and not is_attacking:
 			$AnimatedSprite2D.play("default")
 		
 
@@ -119,7 +121,7 @@ func apply_knockback(source_position: Vector2) -> void:
 		return
 
 	var sprite = $AnimatedSprite2D
-	sprite.modulate = Color(HEALTH/100, 0.0, 0.0, 1.0)
+	sprite.modulate = Color(HEALTH/100, HEALTH/160, HEALTH/160, 1.0)
 
 	var knockback_direction := global_position - source_position
 	if knockback_direction.length_squared() == 0.0:
@@ -131,10 +133,8 @@ func apply_knockback(source_position: Vector2) -> void:
 	knockback_time_left = KNOCKBACK_DURATION
 
 func start_timer():
-	$Timer.start()
+	pass
 
-func _on_timer_timeout() -> void:
-	$AnimatedSprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 
 func _on_attack_area_entered(area: Area2D) -> void:

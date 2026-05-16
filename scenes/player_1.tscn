@@ -19,7 +19,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ATTACK",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -58,14 +58,10 @@ script = ExtResource("1_rfmnd")
 texture_filter = 5
 scale = Vector2(1, 0.963)
 sprite_frames = SubResource("SpriteFrames_f2c3w")
-frame_progress = 0.2565188
+animation = &"ATTACK"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1890329774]
 shape = SubResource("RectangleShape2D_bxx23")
-
-[node name="Timer" type="Timer" parent="." unique_id=1677668276]
-wait_time = 3.0
-one_shot = true
 
 [node name="attack" type="Area2D" parent="." unique_id=723697341]
 
@@ -81,6 +77,5 @@ texture = ExtResource("6_qgfdq")
 [node name="AttackTimer" type="Timer" parent="." unique_id=705868225]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="attack" to="." method="_on_attack_area_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

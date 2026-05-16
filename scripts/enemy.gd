@@ -30,7 +30,6 @@ func _physics_process(delta: float) -> void:
 	elif global_position.x <= start_pos_x - Distance:
 		direction = 1
 		_update_sprite()
-	print(is_damagable)
 
 # Extracted sprite logic to a helper function to keep the physics process clean
 func _update_sprite() -> void:
