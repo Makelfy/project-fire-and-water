@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cbri65q50s534"]
 
 [ext_resource type="Script" uid="uid://o2pvt3elak5l" path="res://scripts/Knockback.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://dao3uxxfc3fdl" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="3_4ra3w"]
 
@@ -10,7 +11,7 @@ size = Vector2(112, 104)
 [node name="Enemy" type="Area2D" unique_id=1901609634 groups=["enemy"]]
 collision_mask = 7
 script = ExtResource("1_md0e3")
-Distance = 500.0
+Distance = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981531920]
 shape = SubResource("RectangleShape2D_5uy6h")
