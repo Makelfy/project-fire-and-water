@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://bh8t3lwtdxfk6"]
+[gd_scene format=3 uid="uid://ctvyv02di7av0"]
 
 [ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
 [ext_resource type="Texture2D" uid="uid://b04bxt2k1mpkn" path="res://assets/images/player2.png" id="2_s551d"]
-[ext_resource type="Script" uid="uid://b6dsyinuos1n0" path="res://scenes/flashlight.gd" id="3_0mr0g"]
+[ext_resource type="Script" path="res://scenes/flashlight.gd" id="3_0mr0g"]
 [ext_resource type="Texture2D" uid="uid://djd1303uyfhgl" path="res://flashlight.jpg" id="3_oc1kf"]
 [ext_resource type="Script" uid="uid://rot75lxe0tp" path="res://scenes/point_light_2d_2.gd" id="4_0mr0g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s551d"]
-size = Vector2(112, 112)
+size = Vector2(48, 64)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_0mr0g"]
 points = PackedVector2Array(352, -144, 0, 0, 384, 0, 496, -80, 480, -144)
@@ -17,12 +17,12 @@ collision_layer = 4
 script = ExtResource("1_l6tho")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=147848813]
-position = Vector2(-7.843875e-06, -1.0557432e-05)
-scale = Vector2(0.2570281, 0.34594592)
+position = Vector2(32.000004, 32.000008)
+scale = Vector2(0.12851404, 0.17297295)
 texture = ExtResource("2_s551d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665167375]
-position = Vector2(0, 1.5)
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_s551d")
 
 [node name="Flashlight" type="Area2D" parent="." unique_id=1799650891 groups=["player"]]
