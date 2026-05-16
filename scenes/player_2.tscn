@@ -1,13 +1,14 @@
-[gd_scene format=3 uid="uid://ctvyv02di7av0"]
+[gd_scene format=3 uid="uid://bh8t3lwtdxfk6"]
 
 [ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
 [ext_resource type="Texture2D" uid="uid://bvm445mk7hy2h" path="res://assets/images/player2_walk.png" id="2_povjg"]
 [ext_resource type="Script" path="res://scenes/flashlight.gd" id="3_0mr0g"]
 [ext_resource type="Texture2D" uid="uid://bur5u5wl1w8sr" path="res://assets/images/player2_idle.png" id="3_hkoe6"]
 [ext_resource type="Texture2D" uid="uid://djd1303uyfhgl" path="res://flashlight.jpg" id="3_oc1kf"]
-[ext_resource type="Script" uid="uid://rot75lxe0tp" path="res://scenes/point_light_2d_2.gd" id="4_0mr0g"]
+[ext_resource type="Script" path="res://scenes/point_light_2d_2.gd" id="4_0mr0g"]
 [ext_resource type="Texture2D" uid="uid://bm54cj3rmmdk8" path="res://assets/images/player2_idle2.png" id="4_ne6jw"]
 [ext_resource type="Texture2D" uid="uid://crmwlumyran8k" path="res://assets/images/flashlight.png" id="8_hkoe6"]
+[ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="9_ne6jw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b2c7a"]
 animations = [{
@@ -76,6 +77,13 @@ texture = ExtResource("8_hkoe6")
 [node name="Timer" type="Timer" parent="." unique_id=405105296]
 wait_time = 3.0
 one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1656304251]
+position = Vector2(3.9999952, -16.000002)
+scale = Vector2(0.11779378, 0.15243904)
+shadow_enabled = true
+texture = ExtResource("9_ne6jw")
+texture_scale = 4.51
 
 [connection signal="area_entered" from="Flashlight" to="." method="_on_flashlight_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
