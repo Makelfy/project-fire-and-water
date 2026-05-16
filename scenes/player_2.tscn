@@ -1,25 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://bh8t3lwtdxfk6"]
+[gd_scene format=3 uid="uid://ctvyv02di7av0"]
 
-[ext_resource type="Script" path="res://scripts/player_2.gd" id="1_l6tho"]
+[ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
+[ext_resource type="Texture2D" uid="uid://b04bxt2k1mpkn" path="res://assets/images/player2.png" id="2_s551d"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xjnt"]
-size = Vector2(128, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s551d"]
+size = Vector2(112, 112)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8xjnt"]
 radius = 384.083
 
-[node name="player2" type="CharacterBody2D"]
+[node name="player2" type="CharacterBody2D" unique_id=1334981847 groups=["player"]]
 collision_layer = 4
 script = ExtResource("1_l6tho")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=147848813]
+position = Vector2(-7.843875e-06, -1.0557432e-05)
+scale = Vector2(0.2570281, 0.34594592)
+texture = ExtResource("2_s551d")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_8xjnt")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665167375]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_s551d")
 
-[node name="Flashlight" type="Area2D" parent="." groups=["player"]]
+[node name="Flashlight" type="Area2D" parent="." unique_id=1799650891 groups=["player"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flashlight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flashlight" unique_id=1745057637]
 shape = SubResource("CircleShape2D_8xjnt")
 
+[node name="Timer" type="Timer" parent="." unique_id=405105296]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="area_entered" from="Flashlight" to="." method="_on_flashlight_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
