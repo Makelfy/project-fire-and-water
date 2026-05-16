@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ba3nunuuf1ek" path="res://scenes/ranged_monster.tscn" id="1_ehaeo"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="2_385sv"]
-[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_ehaeo"]
+[ext_resource type="PackedScene" uid="uid://bh8t3lwtdxfk6" path="res://scenes/player_2.tscn" id="4_ehaeo"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="4_k6137"]
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="7_51sjs"]
 
@@ -12,7 +12,7 @@ size = Vector2(20, 134)
 [node name="MonsterTesting" type="Node2D" unique_id=1824821853]
 
 [node name="RangedMonster" parent="." unique_id=1576581175 node_paths=PackedStringArray("player1", "player2") instance=ExtResource("1_ehaeo")]
-position = Vector2(852, 370)
+position = Vector2(845, 479)
 player1 = NodePath("../player1")
 player2 = NodePath("../player2")
 
@@ -47,5 +47,5 @@ position = Vector2(51, 364)
 position = Vector2(441, 377)
 
 [node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("7_51sjs")]
-position = Vector2(686, 426)
+position = Vector2(679, 487)
 Distance = 400.0

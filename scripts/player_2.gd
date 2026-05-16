@@ -82,7 +82,6 @@ func take_damage(damage: float) -> void:
 	if is_dead:
 		return
 
-	print("damage")
 	if not damage_cooldown:
 		damage_cooldown = true
 		HEALTH -= damage
@@ -106,7 +105,6 @@ func apply_knockback(source_position: Vector2) -> void:
 		knockback_direction = knockback_direction.normalized()
 
 	velocity = knockback_direction * KNOCKBACK_FORCE
-	print(velocity)
 	knockback_time_left = KNOCKBACK_DURATION
 
 func start_timer():
@@ -117,7 +115,11 @@ func _on_timer_timeout() -> void:
 
 func _on_flashlight_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("enemy")):
-		pass
+		area.set_damagable(true)
 
+func _on_flashlight_area_exited(area: Area2D) -> void:
+	if(area.is_in_group("enemy")):
+		area.set_damagable(false)
+	
 func _ready():
 	$AnimatedSprite2D.play("default")

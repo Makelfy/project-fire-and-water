@@ -7,6 +7,9 @@ const SPEED = 150
 var start_pos_x: float
 var direction: int = 1
 
+var HEALTH = 2
+var is_damagable := false
+
 var light_start_positions := {}
 
 func _ready() -> void:
@@ -57,3 +60,12 @@ func _on_body_entered(body: Node2D) -> void:
 
 		if body.has_method("apply_knockback"):
 			body.apply_knockback(global_position)
+
+func take_damage():
+	if is_damagable:
+		HEALTH -= 1
+	if HEALTH <= 0:
+		queue_free()
+
+func set_damagable(val):
+	is_damagable = val
