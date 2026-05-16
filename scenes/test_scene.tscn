@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dl2a3jw3hlr8f"]
 
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="1_j8ivh"]
-[ext_resource type="PackedScene" uid="uid://dhxnglxw875j3" path="res://scenes/player_1.tscn" id="2_nd71p"]
+[ext_resource type="PackedScene" uid="uid://cq4453rj5fqu" path="res://scenes/player_1.tscn" id="2_nd71p"]
 [ext_resource type="Texture2D" uid="uid://orj71d5lbbyq" path="res://assets/images/background.jpg" id="3_nd71p"]
-[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_7ddre"]
+[ext_resource type="PackedScene" uid="uid://bh8t3lwtdxfk6" path="res://scenes/player_2.tscn" id="4_7ddre"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ddre"]
 
