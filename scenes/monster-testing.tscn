@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://dg16quis6wh6g"]
+[gd_scene format=3 uid="uid://dowjx03es1sc"]
 
 [ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="1_8i7lx"]
 [ext_resource type="Script" uid="uid://drwh624jcaes3" path="res://scripts/monster.gd" id="1_385sv"]
 [ext_resource type="PackedScene" uid="uid://cykrfm76nmcrb" path="res://scenes/bullet.tscn" id="2_378s4"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="2_385sv"]
-[ext_resource type="PackedScene" path="res://scenes/player_2.tscn" id="4_ehaeo"]
+[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_ehaeo"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="4_k6137"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehaeo"]
@@ -15,19 +15,18 @@ size = Vector2(20, 134)
 
 [node name="MonsterTesting" type="Node2D" unique_id=1824821853]
 
-[node name="Monster" type="RigidBody2D" parent="." unique_id=2022828183 node_paths=PackedStringArray("player1", "player2")]
-position = Vector2(502, 64)
+[node name="Monster" type="Area2D" parent="." unique_id=1634168666 node_paths=PackedStringArray("player1", "player2")]
+position = Vector2(843, 407.99997)
 scale = Vector2(1.04, 0.76)
 collision_mask = 7
-gravity_scale = 0.0
 script = ExtResource("1_385sv")
 player1 = NodePath("../player1")
 player2 = NodePath("../player2")
 bullet = ExtResource("2_378s4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1347981985]
+scale = Vector2(1.0769418, 1)
 shape = SubResource("CapsuleShape2D_ehaeo")
-disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Monster" unique_id=5055778]
 position = Vector2(0, -5.2631836)
@@ -38,6 +37,7 @@ texture = ExtResource("1_8i7lx")
 collision_mask = 7
 
 [node name="Player2Raycast" type="RayCast2D" parent="Monster" unique_id=1704649301]
+position = Vector2(0, 4.0154708e-05)
 collision_mask = 7
 
 [node name="Area2D" type="StaticBody2D" parent="." unique_id=1917967332]
@@ -73,4 +73,9 @@ position = Vector2(441, 377)
 [node name="Timer" type="Timer" parent="." unique_id=1370093535]
 autostart = true
 
+[node name="player1" parent="." unique_id=1766431460 instance=ExtResource("4_k6137")]
+
+[node name="player2" parent="." unique_id=1334981847 instance=ExtResource("4_ehaeo")]
+
+[connection signal="body_entered" from="Monster" to="Monster" method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="Monster" method="_on_timer_timeout"]

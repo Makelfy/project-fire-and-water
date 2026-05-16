@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 @onready var main = $".."
 @onready var raycast_1 = $Player1Raycast
@@ -8,17 +8,28 @@ extends RigidBody2D
 @export var player2: CharacterBody2D
 @export var bullet: PackedScene
 
+@onready var player1_raycast: RayCast2D = $Player1Raycast
+@onready var player2_raycast: RayCast2D = $Player2Raycast
+
 var player1_firable: bool = false
 var player2_firable: bool = false
 
-func _physics_process(_delta: float) -> void:
-	if player1:
-		raycast_1.target_position = to_local(player1.global_position)
-		raycast_1.force_raycast_update() 
-		print(raycast_1.get_collider())
-		player1_firable = (raycast_1.get_collider() == player1)
-	else:
-		player1_firable = false
+
+func _ready() -> void:
+	player1_raycast.enabled = true
+	player2_raycast.enabled = true
+
+	var timer := get_node_or_null("Timer") as Timer
+	if timer == null and get_parent() != null:
+		timer = get_parent().get_node_or_null("Timer") as Timer
+
+	if timer != null and not timer.timeout.is_connected(_on_timer_timeout):
+		timer.timeout.connect(_on_timer_timeout)
+
+
+func _physics_process(delta: float) -> void:
+	player1_firable = can_shoot_player(player1, player1_raycast)
+	player2_firable = can_shoot_player(player2, player2_raycast)
 
 	if player2:
 		raycast_2.target_position = to_local(player2.global_position)
@@ -27,9 +38,28 @@ func _physics_process(_delta: float) -> void:
 	else:
 		player2_firable = false
 
-func shoot(target_player: Node2D):
-	var instance = bullet.instantiate()
-	instance.dir = (target_player.global_position - global_position).normalized()
+func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
+	if player == null:
+		return false
+
+	raycast.target_position = raycast.to_local(player.global_position)
+	raycast.force_raycast_update()
+
+	return raycast.is_colliding() and raycast.get_collider() == player
+
+
+func shoot(player):
+	if bullet == null:
+		return
+
+	isShooting = true
+	if time == 3:
+		var instance = bullet.instantiate()
+		instance.dir = global_position - player.global_position
+		instance.spawnPos = global_position+Vector2(30,30)
+		instance.spawnRot = rotation
+		instance.zDex = z_index - 1
+		main.add_child.call_deferred(instance)
 	
 	instance.spawnPos = global_position 
 	instance.spawnRot = rotation
@@ -52,3 +82,26 @@ func _on_timer_timeout() -> void:
 		shoot(player1)
 	elif player2_firable:
 		shoot(player2)
+	
+	if isShooting:
+		if time < 0:
+			time = 3
+		else:
+			time -= 1
+	else:
+		if time > 0 and time != 3:
+			time -= 1
+		else:
+			time = 3
+
+	
+	print(time)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		var sprite = body.get_child(0)
+		sprite.modulate = Color(1.0, 0.0, 0.0, 1.0)
+		body.start_timer()
+		if body.has_method("apply_knockback"):
+			body.apply_knockback(global_position)
