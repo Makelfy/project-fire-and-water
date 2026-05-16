@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
 [ext_resource type="Texture2D" uid="uid://bvm445mk7hy2h" path="res://assets/images/player2_walk.png" id="2_povjg"]
-[ext_resource type="Script" uid="uid://b6dsyinuos1n0" path="res://scenes/flashlight.gd" id="3_0mr0g"]
+[ext_resource type="Script" path="res://scenes/flashlight.gd" id="3_0mr0g"]
 [ext_resource type="Texture2D" uid="uid://bur5u5wl1w8sr" path="res://assets/images/player2_idle.png" id="3_hkoe6"]
 [ext_resource type="Texture2D" uid="uid://djd1303uyfhgl" path="res://flashlight.jpg" id="3_oc1kf"]
 [ext_resource type="Script" uid="uid://rot75lxe0tp" path="res://scenes/point_light_2d_2.gd" id="4_0mr0g"]
@@ -45,17 +45,16 @@ collision_layer = 4
 script = ExtResource("1_l6tho")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2121929346]
-position = Vector2(0, -32)
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_b2c7a")
 animation = &"WALK"
 frame_progress = 0.55000675
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665167375]
-position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_s551d")
 
 [node name="Flashlight" type="Area2D" parent="." unique_id=1799650891 groups=["player"]]
-position = Vector2(0, -8)
+position = Vector2(8, 11)
 script = ExtResource("3_0mr0g")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Flashlight" unique_id=1543392118]
