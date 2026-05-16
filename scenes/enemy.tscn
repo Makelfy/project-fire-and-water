@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dao3uxxfc3fdl" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="3_4ra3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
 size = Vector2(130, 109)
@@ -9,6 +10,7 @@ size = Vector2(130, 109)
 [node name="Enemy" type="Area2D" unique_id=1901609634]
 position = Vector2(576, 448)
 script = ExtResource("1_md0e3")
+DISTANCE = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981531920]
 position = Vector2(2, 7.5)
@@ -18,3 +20,11 @@ shape = SubResource("RectangleShape2D_5uy6h")
 position = Vector2(0, -2)
 scale = Vector2(3, 3)
 texture = ExtResource("2_4ra3w")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=1020277725]
+position = Vector2(0.05208206, -2.3431022)
+scale = Vector2(0.041259736, 0.04434714)
+color = Color(1, 1, 0, 1)
+energy = 16.0
+shadow_enabled = true
+texture = ExtResource("3_4ra3w")

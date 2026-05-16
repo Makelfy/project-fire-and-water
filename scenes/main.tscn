@@ -1,3 +1,42 @@
 [gd_scene format=3 uid="uid://d4napowrdwstm"]
 
+[ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://djd1303uyfhgl" path="res://flashlight.jpg" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://rot75lxe0tp" path="res://scenes/point_light_2d_2.gd" id="4_jyhfs"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0wfyh"]
+polygon = PackedVector2Array(658, 384, 529, 398, 529, 481, 649, 504)
+
 [node name="Main" type="Node2D" unique_id=522975545]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1752052891]
+color = Color(0.00055431953, 0.0007879026, 0.0014660568, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=351469162]
+polygon = PackedVector2Array(0, 648, 1152, 648, 1152, 0, 0, 0)
+
+[node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("1_o5qli")]
+position = Vector2(283, 310)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=194177348]
+position = Vector2(108.00006, 733)
+scale = Vector2(3.6875002, 3.6113281)
+energy = 0.75
+shadow_enabled = true
+texture = ExtResource("2_0wfyh")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=543397316]
+occluder = SubResource("OccluderPolygon2D_0wfyh")
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1013595015]
+position = Vector2(678, 270.00003)
+rotation = 0.3926991
+scale = Vector2(6.5452347, 6.797323)
+skew = 0.7853982
+energy = 1.16
+shadow_enabled = true
+texture = ExtResource("3_sugp2")
+offset = Vector2(49, -49)
+texture_scale = 0.71
+script = ExtResource("4_jyhfs")
