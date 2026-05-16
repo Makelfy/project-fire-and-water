@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="2_nd71p"]
 [ext_resource type="Texture2D" uid="uid://orj71d5lbbyq" path="res://assets/images/background.jpg" id="3_nd71p"]
-[ext_resource type="PackedScene" path="res://scenes/player_2.tscn" id="4_7ddre"]
+[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_7ddre"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="5_qjeyg"]
-[ext_resource type="Script" uid="uid://cu86vlmtay04e" path="res://scripts/canvas_layer.gd" id="6_canvas"]
-[ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="7_gameover"]
+[ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="6_canvas"]
+[ext_resource type="PackedScene" path="res://scenes/gameover.tscn" id="7_gameover"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ddre"]
 
@@ -77,6 +77,7 @@ sources/0 = SubResource("TileSetAtlasSource_3qnke")
 position = Vector2(560, 640)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
+visible = false
 position = Vector2(16.000122, -316)
 scale = Vector2(0.25599992, 0.21066669)
 color = Color(0, 0, 0, 1)
@@ -89,7 +90,7 @@ position = Vector2(-144, -152)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1789583880]
 z_index = -2
-position = Vector2(79.50018, -275.50006)
+position = Vector2(79.50012, -275.5)
 scale = Vector2(0.28422216, 0.23766665)
 texture = ExtResource("3_nd71p")
 

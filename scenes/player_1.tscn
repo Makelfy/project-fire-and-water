@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c7baat0ta8y7i" path="res://assets/images/player1_idle2.png" id="2_vod78"]
 [ext_resource type="Texture2D" uid="uid://c22oxs1ihfxb1" path="res://assets/images/player1_attack2.png" id="3_jkihx"]
 [ext_resource type="Texture2D" uid="uid://be6qoqyjie57q" path="res://assets/images/player1_idle.png" id="3_wqd30"]
+[ext_resource type="Texture2D" uid="uid://mngca1f68w3e" path="res://assets/images/player1_walk.png" id="4_jkihx"]
 [ext_resource type="Texture2D" uid="uid://mvl2lba07x3m" path="res://assets/images/attack.png" id="6_qgfdq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f2c3w"]
@@ -18,6 +19,17 @@ animations = [{
 }],
 "loop": false,
 "name": &"ATTACK",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jkihx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wqd30")
+}],
+"loop": true,
+"name": &"WALK",
 "speed": 5.0
 }, {
 "frames": [{
