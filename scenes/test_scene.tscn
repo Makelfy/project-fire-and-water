@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dl2a3jw3hlr8f"]
+[gd_scene format=3 uid="uid://bf2qdij8eid3f"]
 
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cq4453rj5fqu" path="res://scenes/player_1.tscn" id="2_nd71p"]
@@ -9,6 +9,11 @@
 
 [node name="TestScene" type="StaticBody2D" unique_id=348861856]
 position = Vector2(560, 640)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
+position = Vector2(16.000122, -316)
+scale = Vector2(0.25599992, 0.21066669)
+color = Color(0.100694425, 0.14963722, 0.1292808, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=295182384]
 shape = SubResource("WorldBoundaryShape2D_7ddre")
