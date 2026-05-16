@@ -1,10 +1,9 @@
-[gd_scene format=3 uid="uid://dg16quis6wh6g"]
+[gd_scene format=3 uid="uid://dowjx03es1sc"]
 
 [ext_resource type="PackedScene" uid="uid://ba3nunuuf1ek" path="res://scenes/ranged_monster.tscn" id="1_ehaeo"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="2_385sv"]
 [ext_resource type="PackedScene" path="res://scenes/player_2.tscn" id="4_ehaeo"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="4_k6137"]
-[ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="7_51sjs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_378s4"]
 size = Vector2(20, 134)
