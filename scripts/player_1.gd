@@ -111,7 +111,7 @@ func apply_knockback(source_position: Vector2) -> void:
 	if is_dead:
 		return
 
-	var sprite = $Sprite2D
+	var sprite = $AnimatedSprite2D
 	sprite.modulate = Color(HEALTH/100, 0.0, 0.0, 1.0)
 
 	var knockback_direction := global_position - source_position
@@ -128,7 +128,7 @@ func start_timer():
 	$Timer.start()
 
 func _on_timer_timeout() -> void:
-	$Sprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	$AnimatedSprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 
 func _on_attack_area_entered(area: Area2D) -> void:
