@@ -1,13 +1,16 @@
-[gd_scene format=3 uid="uid://ctvyv02di7av0"]
+[gd_scene format=3 uid="uid://bh8t3lwtdxfk6"]
 
 [ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
 [ext_resource type="Texture2D" uid="uid://b04bxt2k1mpkn" path="res://assets/images/player2.png" id="2_s551d"]
+[ext_resource type="Script" uid="uid://b6dsyinuos1n0" path="res://scenes/flashlight.gd" id="3_0mr0g"]
+[ext_resource type="Texture2D" uid="uid://djd1303uyfhgl" path="res://flashlight.jpg" id="3_oc1kf"]
+[ext_resource type="Script" uid="uid://rot75lxe0tp" path="res://scenes/point_light_2d_2.gd" id="4_0mr0g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s551d"]
 size = Vector2(112, 112)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8xjnt"]
-radius = 384.083
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_0mr0g"]
+points = PackedVector2Array(352, -144, 0, 0, 384, 0, 496, -80, 480, -144)
 
 [node name="player2" type="CharacterBody2D" unique_id=1334981847 groups=["player"]]
 collision_layer = 4
@@ -23,9 +26,20 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_s551d")
 
 [node name="Flashlight" type="Area2D" parent="." unique_id=1799650891 groups=["player"]]
+script = ExtResource("3_0mr0g")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Flashlight" unique_id=1543392118]
+scale = Vector2(4, 4.154)
+skew = 1.1780972
+energy = 1.2
+shadow_enabled = true
+texture = ExtResource("3_oc1kf")
+offset = Vector2(49, -49)
+texture_scale = 0.71
+script = ExtResource("4_0mr0g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flashlight" unique_id=1745057637]
-shape = SubResource("CircleShape2D_8xjnt")
+shape = SubResource("ConvexPolygonShape2D_0mr0g")
 
 [node name="Timer" type="Timer" parent="." unique_id=405105296]
 wait_time = 3.0
