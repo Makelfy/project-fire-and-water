@@ -5,6 +5,8 @@ const MAX_SPEED = 500.0
 const SPEED = 300.0
 const ACC = 20.0
 const JUMP_VELOCITY = -700.0
+
+# Knockback parameters
 @export var KNOCKBACK_FORCE = 650.0
 const KNOCKBACK_DURATION = 0.18
 const KNOCKBACK_FRICTION = 1800.0
@@ -50,6 +52,7 @@ func apply_knockback(source_position: Vector2) -> void:
 		knockback_direction = knockback_direction.normalized()
 
 	velocity = knockback_direction * KNOCKBACK_FORCE
+	print(velocity)
 	knockback_time_left = KNOCKBACK_DURATION
 
 func start_timer():
