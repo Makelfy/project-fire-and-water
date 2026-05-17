@@ -5,7 +5,8 @@ const SPEED = 150
 @export var Distance := 100.0
 @export var start_dir : int
 
-var start_pos_x: float
+var patrol_points: Array[Vector2] = []
+var target_point_index: int = 1
 var direction: int = 1
 
 var HEALTH = 2
@@ -23,8 +24,7 @@ func _ready() -> void:
 			light_start_positions[child] = child.position
 
 func _physics_process(delta: float) -> void:
-	# Do nothing if Distance is 0 or negative
-	if Distance <= 0:
+	if patrol_points.size() < 2:
 		return
 
 	# 1. Move the object
@@ -55,6 +55,18 @@ func _update_sprite() -> void:
 			var start_position: Vector2 = light_start_positions[light]
 			light.position.x = start_position.x * direction * -1
 		
+func _update_direction(movement_to_target: Vector2) -> void:
+	if absf(movement_to_target.x) <= 0.01:
+		return
+
+	direction = 1 if movement_to_target.x > 0.0 else -1
+	_update_sprite()
+
+func _advance_patrol_target() -> void:
+	target_point_index = 1 - target_point_index
+
+	var movement_to_target: Vector2 = patrol_points[target_point_index] - global_position
+	_update_direction(movement_to_target)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

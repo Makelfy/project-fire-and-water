@@ -49,7 +49,6 @@ position = Vector2(441, 377)
 
 [node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("7_51sjs")]
 position = Vector2(672, 247)
-Distance = 400.0
 
 [node name="Mole" parent="." unique_id=464048357 instance=ExtResource("6_378s4")]
 z_index = -1
