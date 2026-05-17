@@ -1142,6 +1142,7 @@ sources/1 = SubResource("TileSetAtlasSource_h3xc6")
 position = Vector2(560, 639)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
+visible = false
 position = Vector2(16.000122, -316)
 scale = Vector2(0.25599992, 0.21066669)
 color = Color(0, 0, 0, 1)

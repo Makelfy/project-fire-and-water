@@ -2,8 +2,8 @@ extends Area2D
 
 const SPEED = 150
 
-@export var patrol_point_a: NodePath
-@export var patrol_point_b: NodePath
+@export var Distance := 100.0
+@export var start_dir : int
 
 var patrol_points: Array[Vector2] = []
 var target_point_index: int = 1
@@ -15,8 +15,8 @@ var is_damagable := false
 var light_start_positions := {}
 
 func _ready() -> void:
-	_setup_patrol_points()
-	
+	# Save the initial starting position
+	start_pos_x = global_position.x
 	$Sprite2D.play("default")
 
 	for child in $Sprite2D.get_children():
@@ -27,29 +27,23 @@ func _physics_process(delta: float) -> void:
 	if patrol_points.size() < 2:
 		return
 
-	var target_position: Vector2 = patrol_points[target_point_index]
-	var movement_to_target: Vector2 = target_position - global_position
-	_update_direction(movement_to_target)
+	# 1. Move the object
+	global_position.x += SPEED * delta * direction
+	
+	if start_dir == -1 or start_dir == 1:
+		direction = start_dir
+		_update_sprite()
+		start_dir = 0
+	# 2. Check if it hit the right boundary
+	elif global_position.x > start_pos_x + Distance:
+		direction = -1
+		_update_sprite()
 
-	if movement_to_target.length() <= SPEED * delta:
-		global_position = target_position
-		_advance_patrol_target()
-		return
-
-	global_position += movement_to_target.normalized() * SPEED * delta
-
-func _setup_patrol_points() -> void:
-	patrol_points.clear()
-
-	var point_a := get_node_or_null(patrol_point_a) as Node2D
-	var point_b := get_node_or_null(patrol_point_b) as Node2D
-
-	if point_a == null or point_b == null:
-		return
-
-	patrol_points.append(point_a.global_position)
-	patrol_points.append(point_b.global_position)
-	target_point_index = 1
+	# 3. Check if it hit the left boundary
+	elif global_position.x <= start_pos_x - Distance:
+		direction = 1
+		_update_sprite()
+	
 
 # Extracted sprite logic to a helper function to keep the physics process clean
 func _update_sprite() -> void:
