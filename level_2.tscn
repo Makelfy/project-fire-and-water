@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bx4nc4iky78g2"]
+[gd_scene format=4 uid="uid://bcvf83ku1u653"]
 
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="1_0s5r2"]
 [ext_resource type="Script" uid="uid://erwipmgcsrmt" path="res://level_2.gd" id="1_ehv2h"]
@@ -1199,7 +1199,6 @@ position = Vector2(-208, -407)
 [node name="FlyingEnemy" parent="." unique_id=1901609634 instance=ExtResource("8_7dov7")]
 position = Vector2(280, -487)
 Distance = 200.0
-start_dir = 1
 
 [node name="FlyingEnemy2" parent="." unique_id=297055711 instance=ExtResource("8_7dov7")]
 position = Vector2(72, -487)
