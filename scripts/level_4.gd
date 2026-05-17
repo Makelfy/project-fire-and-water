@@ -16,7 +16,7 @@ func _on_finish_body_entered(body: Node2D) -> void:
 		player_count += 1
 	if(player_count > 1):
 		print("test")
-		get_tree().change_scene_to_file("res://levels/level_4.tscn")
+		get_tree().change_scene_to_file("res://scenes/end_screen.tscn")
 	
 
 
