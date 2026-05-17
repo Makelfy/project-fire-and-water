@@ -13,6 +13,7 @@ var is_damagable := false
 
 func _ready() -> void:
 	# Save the initial starting position
+	$Sprite2D.play("dig")
 	start_pos_x = global_position.x
 
 func _physics_process(delta: float) -> void:
@@ -37,7 +38,7 @@ func _physics_process(delta: float) -> void:
 func _update_sprite() -> void:
 	if has_node("Sprite2D"):
 		# If direction is -1 (left), flip_h is true. Otherwise, false.
-		$Sprite2D.flip_h = (direction == -1)
+		$Sprite2D.flip_h = (direction == 1)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -70,11 +71,12 @@ func dig(is_digging_down):
 	if is_digging_down:
 		final_destination = global_position - dig_distance
 		is_underground = true
+		$GPUParticles2D.emitting = true
 	else:
 		final_destination = global_position + dig_distance
 		is_underground = false
+		$GPUParticles2D.emitting = false
 		
 	var tween = get_tree().create_tween()
-
 	tween.tween_property(self, "global_position", final_destination, 0.5)
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
