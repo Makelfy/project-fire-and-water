@@ -26,8 +26,7 @@ animations = [{
 position = Vector2(664, 352)
 collision_mask = 7
 script = ExtResource("1_lrtul")
-patrol_point_a = NodePath("PatrolPointA")
-patrol_point_b = NodePath("PatrolPointB")
+start_dir = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981531920]
 position = Vector2(32, -32)
