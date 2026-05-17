@@ -36,7 +36,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s551d"]
-size = Vector2(48, 48)
+size = Vector2(26, 44)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_0mr0g"]
 points = PackedVector2Array(352, -144, 0, 0, 384, 0, 496, -80, 480, -144)
@@ -52,6 +52,7 @@ animation = &"WALK"
 frame_progress = 0.55000675
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665167375]
+position = Vector2(-1, 2)
 shape = SubResource("RectangleShape2D_s551d")
 
 [node name="Flashlight" type="Area2D" parent="." unique_id=1799650891 groups=["player"]]

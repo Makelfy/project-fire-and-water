@@ -3,6 +3,7 @@ extends Area2D
 const SPEED = 150
 
 @export var Distance := 100.0
+@export var start_dir : int
 
 var start_pos_x: float
 var direction: int = 1
@@ -15,7 +16,6 @@ var light_start_positions := {}
 func _ready() -> void:
 	# Save the initial starting position
 	start_pos_x = global_position.x
-	
 	$Sprite2D.play("default")
 
 	for child in $Sprite2D.get_children():
@@ -29,9 +29,13 @@ func _physics_process(delta: float) -> void:
 
 	# 1. Move the object
 	global_position.x += SPEED * delta * direction
-
+	
+	if start_dir == -1 or start_dir == 1:
+		direction = start_dir
+		_update_sprite()
+		start_dir = 0
 	# 2. Check if it hit the right boundary
-	if global_position.x >= start_pos_x + Distance:
+	elif global_position.x > start_pos_x + Distance:
 		direction = -1
 		_update_sprite()
 
@@ -39,6 +43,7 @@ func _physics_process(delta: float) -> void:
 	elif global_position.x <= start_pos_x - Distance:
 		direction = 1
 		_update_sprite()
+	
 
 # Extracted sprite logic to a helper function to keep the physics process clean
 func _update_sprite() -> void:

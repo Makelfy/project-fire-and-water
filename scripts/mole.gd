@@ -66,6 +66,8 @@ func _on_timer_timeout() -> void:
 	else:
 		dig(true)
 		
+
+		
 func dig(is_digging_down):
 	var final_destination
 	if is_digging_down:

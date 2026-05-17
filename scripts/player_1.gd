@@ -80,6 +80,13 @@ func _physics_process(delta: float) -> void:
 func start_attack():
 	is_attacking = true	
 	$AnimatedSprite2D.play("ATTACK")
+	$AttackTimer.start()
+	$attack.show()
+	$attack/CollisionShape2D.set_deferred("disabled", false)
+	await get_tree().create_timer(0.1).timeout
+	$attack/CollisionShape2D.set_deferred("disabled", true)
+	$attack.hide()
+	$AnimatedSprite2D.play("default")
 
 func handle_death() -> void:
 	if is_dead:
@@ -105,6 +112,8 @@ func handle_death() -> void:
 
 var damage_cooldown = false
 func take_damage(damage: float) -> void:
+	if is_attacking:
+		return
 	if is_dead:
 		return
 
@@ -143,13 +152,3 @@ func _on_attack_area_entered(area: Area2D) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	is_attacking = false
-
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	$AttackTimer.start()
-	$attack.show()
-	$attack/CollisionShape2D.set_deferred("disabled", false)
-	await get_tree().create_timer(0.1).timeout
-	$attack/CollisionShape2D.set_deferred("disabled", true)
-	$attack.hide()
-	$AnimatedSprite2D.play("default")
