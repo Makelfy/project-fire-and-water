@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://bf2qdij8eid3f"]
 
+[ext_resource type="Script" uid="uid://gf18fxmfayp3" path="res://scripts/level_1.gd" id="1_5ot28"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="1_08mmt"]
 [ext_resource type="Texture2D" uid="uid://bttwdcaa02r63" path="res://assets/images/Sprite-0002-Sheet.png" id="2_5ot28"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="3_aerfg"]
@@ -1137,8 +1138,12 @@ physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_3qnke")
 sources/1 = SubResource("TileSetAtlasSource_h3xc6")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aerfg"]
+size = Vector2(125, 127)
+
 [node name="TestScene" type="StaticBody2D" unique_id=348861856]
 position = Vector2(560, 639)
+script = ExtResource("1_5ot28")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
 position = Vector2(16.000122, -316)
@@ -1207,4 +1212,13 @@ ATTACK: SPACE
 PLAYER 2 MOVEMENT: ARROWS
 FLASHLIGHT: MOUSE"
 
+[node name="Finish" type="Area2D" parent="." unique_id=1873597650]
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish" unique_id=1155275826]
+position = Vector2(512, 33)
+shape = SubResource("RectangleShape2D_aerfg")
+
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
+[connection signal="body_exited" from="Finish" to="." method="_on_finish_body_exited"]
