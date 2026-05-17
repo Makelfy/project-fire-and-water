@@ -1,27 +1,73 @@
-[gd_scene format=3 uid="uid://d37d6bis83max"]
+[gd_scene format=3 uid="uid://mrg4ei2ucvqx"]
 
 [ext_resource type="Script" uid="uid://dyhxn5qof046d" path="res://scripts/mole.gd" id="1_4qimr"]
-[ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="2_0o2lx"]
+[ext_resource type="Texture2D" uid="uid://dl4y5nn2v07g7" path="res://assets/images/mole_idle.png" id="2_j2wvo"]
+[ext_resource type="Texture2D" uid="uid://myggy8nc8q6l" path="res://assets/images/mole_idle2.png" id="3_xi4vd"]
+[ext_resource type="Texture2D" uid="uid://bfk1w1gscxvbs" path="res://assets/images/mole_dig.png" id="4_ev00m"]
+[ext_resource type="Texture2D" uid="uid://b2v37diov1uqg" path="res://assets/images/mole_dig2.png" id="5_6nfei"]
+[ext_resource type="Texture2D" uid="uid://2fkxnpnsj2hq" path="res://assets/images/mole_particle.png" id="6_xi4vd"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0o2lx"]
-height = 28.578262
+[sub_resource type="SpriteFrames" id="SpriteFrames_slj7y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j2wvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xi4vd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ev00m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6nfei")
+}],
+"loop": true,
+"name": &"dig",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmfyf"]
+size = Vector2(25.392406, 25.164572)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ev00m"]
+particle_flag_disable_z = true
+angle_min = -296.69998
+angle_max = 239.70001
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 400, 0)
 
 [node name="Mole" type="Area2D" unique_id=464048357 groups=["enemy"]]
 collision_mask = 7
 script = ExtResource("1_4qimr")
 dig_distance = Vector2(0, -40)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=650057550]
-scale = Vector2(2.2168922, 1.2397982)
-shape = SubResource("CapsuleShape2D_0o2lx")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2030309839]
-scale = Vector2(0.35121575, 0.2932161)
-texture = ExtResource("2_0o2lx")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1655073536]
+position = Vector2(0, -17)
+sprite_frames = SubResource("SpriteFrames_slj7y")
+animation = &"dig"
 
 [node name="Timer" type="Timer" parent="." unique_id=887633604]
 wait_time = 5.0
 autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=650057550]
+scale = Vector2(2.2168922, 1.2397982)
+shape = SubResource("RectangleShape2D_gmfyf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=214264821]
+emitting = false
+amount = 6
+texture = ExtResource("6_xi4vd")
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ev00m")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
