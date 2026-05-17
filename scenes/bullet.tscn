@@ -7,7 +7,7 @@ radius = 67.20447
 height = 134.40894
 
 [node name="Bullet" type="Area2D" unique_id=185754786]
-z_index = 12
+z_index = 1
 scale = Vector2(0.129, 0.133)
 collision_mask = 7
 script = ExtResource("1_y25gk")
@@ -17,6 +17,7 @@ scale = Vector2(1.4964219, 1.3558415)
 shape = SubResource("CapsuleShape2D_y25gk")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=395708809]
+z_index = 15
 offset_left = -62.015503
 offset_top = -67.66917
 offset_right = 69.76744
