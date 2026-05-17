@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="6_vjtdm"]
 [ext_resource type="PackedScene" path="res://scenes/gameover.tscn" id="7_bgw3c"]
 [ext_resource type="PackedScene" path="res://scenes/flying_enemy.tscn" id="8_lrvbd"]
-[ext_resource type="PackedScene" path="res://scenes/spike.tscn" id="9_oqlok"]
 [ext_resource type="FontFile" uid="uid://djcbw0266806g" path="res://font/ARCADECLASSIC.TTF" id="10_7nvrk"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjeyg"]
@@ -1146,7 +1145,6 @@ position = Vector2(560, 639)
 script = ExtResource("1_5ot28")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
-visible = false
 position = Vector2(16.000122, -316)
 scale = Vector2(0.25599992, 0.21066669)
 color = Color(0, 0, 0, 1)
@@ -1194,9 +1192,6 @@ text = "RESTART"
 [node name="FlyingEnemy" parent="." unique_id=1774007836 instance=ExtResource("8_lrvbd")]
 z_index = 3
 position = Vector2(144, -141)
-
-[node name="Spike" parent="." unique_id=497970394 instance=ExtResource("9_oqlok")]
-position = Vector2(-16, -55)
 
 [node name="ControlsCanvas" type="CanvasLayer" parent="." unique_id=656896790]
 
