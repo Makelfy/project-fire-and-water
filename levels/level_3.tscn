@@ -1,12 +1,13 @@
 [gd_scene format=4 uid="uid://b441b80imiofq"]
 
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="1_52t6y"]
+[ext_resource type="Script" uid="uid://d4kv4nlusynea" path="res://scripts/level_3.gd" id="1_jq78i"]
 [ext_resource type="Texture2D" uid="uid://slidnfmpmk8v" path="res://assets/images/SpriteSheetsecond.png" id="2_ofchu"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="3_358yg"]
-[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_jxpky"]
-[ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="5_06u5y"]
-[ext_resource type="PackedScene" path="res://scenes/gameover.tscn" id="6_ce4gn"]
-[ext_resource type="PackedScene" path="res://scenes/spike.tscn" id="7_t0nuk"]
+[ext_resource type="PackedScene" uid="uid://bh8t3lwtdxfk6" path="res://scenes/player_2.tscn" id="4_jxpky"]
+[ext_resource type="Script" uid="uid://cu86vlmtay04e" path="res://scripts/canvas_layer.gd" id="5_06u5y"]
+[ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="6_ce4gn"]
+[ext_resource type="PackedScene" uid="uid://ddnk0nhyfcwqn" path="res://scenes/spike.tscn" id="7_t0nuk"]
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="8_epatr"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjeyg"]
@@ -1135,8 +1136,12 @@ physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_3qnke")
 sources/1 = SubResource("TileSetAtlasSource_h3xc6")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lsnkt"]
+size = Vector2(95.875, 60.125)
+
 [node name="Level3" type="StaticBody2D" unique_id=348861856]
 position = Vector2(560, 639)
+script = ExtResource("1_jq78i")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
 visible = false
@@ -1207,5 +1212,13 @@ position = Vector2(147, 0)
 
 [node name="PointB" type="Marker2D" parent="Enemy" unique_id=488359764]
 position = Vector2(-88, 0)
+
+[node name="Finish" type="Area2D" parent="." unique_id=1282302753]
+position = Vector2(312, -63)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish" unique_id=944907431]
+position = Vector2(-468.9375, -478.9375)
+shape = SubResource("RectangleShape2D_lsnkt")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]
