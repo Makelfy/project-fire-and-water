@@ -3,23 +3,52 @@
 [ext_resource type="Script" uid="uid://dao3uxxfc3fdl" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="3_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://hhrula0b1xas" path="res://assets/images/enemy_walking.png" id="3_c4w8v"]
+[ext_resource type="Texture2D" uid="uid://cegl2y4xdqee3" path="res://assets/images/enemy_walking2.png" id="4_xwavj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uy6h"]
-size = Vector2(48, 48)
+size = Vector2(80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nenq2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4ra3w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c4w8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xwavj")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 2.0
+}]
 
 [node name="Enemy" type="Area2D" unique_id=1901609634 groups=["enemy"]]
+position = Vector2(264, 272)
 collision_mask = 7
 script = ExtResource("1_md0e3")
-Distance = 5.0
+patrol_point_a = NodePath("PatrolPointA")
+patrol_point_b = NodePath("PatrolPointB")
+min_wait_time = 0.85
+max_wait_time = 2.4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=981531920]
-position = Vector2(32, -32)
+position = Vector2(32, -16)
 shape = SubResource("RectangleShape2D_5uy6h")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=930018956]
-position = Vector2(32, -32)
-scale = Vector2(3, 3)
-texture = ExtResource("2_4ra3w")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1342755986]
+position = Vector2(31.999996, -28)
+scale = Vector2(2.25, 2.375)
+sprite_frames = SubResource("SpriteFrames_nenq2")
+animation = &"walking"
 
 [node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=1001041113]
 position = Vector2(0.054230954, -2.447012)
@@ -39,5 +68,11 @@ energy = 0.28
 shadow_enabled = true
 texture = ExtResource("3_4ra3w")
 texture_scale = 4.51
+
+[node name="PatrolPointA" type="Marker2D" parent="."]
+position = Vector2(-200, 0)
+
+[node name="PatrolPointB" type="Marker2D" parent="."]
+position = Vector2(200, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

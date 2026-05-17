@@ -2,9 +2,11 @@ extends Area2D
 
 const SPEED = 150
 
-@export var Distance := 100.0
+@export var patrol_point_a: NodePath
+@export var patrol_point_b: NodePath
 
-var start_pos_x: float
+var patrol_points: Array[Vector2] = []
+var target_point_index: int = 1
 var direction: int = 1
 
 var HEALTH = 2
@@ -13,8 +15,7 @@ var is_damagable := false
 var light_start_positions := {}
 
 func _ready() -> void:
-	# Save the initial starting position
-	start_pos_x = global_position.x
+	_setup_patrol_points()
 	
 	$Sprite2D.play("default")
 
@@ -23,22 +24,32 @@ func _ready() -> void:
 			light_start_positions[child] = child.position
 
 func _physics_process(delta: float) -> void:
-	# Do nothing if Distance is 0 or negative
-	if Distance <= 0:
+	if patrol_points.size() < 2:
 		return
 
-	# 1. Move the object
-	global_position.x += SPEED * delta * direction
+	var target_position: Vector2 = patrol_points[target_point_index]
+	var movement_to_target: Vector2 = target_position - global_position
+	_update_direction(movement_to_target)
 
-	# 2. Check if it hit the right boundary
-	if global_position.x >= start_pos_x + Distance:
-		direction = -1
-		_update_sprite()
+	if movement_to_target.length() <= SPEED * delta:
+		global_position = target_position
+		_advance_patrol_target()
+		return
 
-	# 3. Check if it hit the left boundary
-	elif global_position.x <= start_pos_x - Distance:
-		direction = 1
-		_update_sprite()
+	global_position += movement_to_target.normalized() * SPEED * delta
+
+func _setup_patrol_points() -> void:
+	patrol_points.clear()
+
+	var point_a := get_node_or_null(patrol_point_a) as Node2D
+	var point_b := get_node_or_null(patrol_point_b) as Node2D
+
+	if point_a == null or point_b == null:
+		return
+
+	patrol_points.append(point_a.global_position)
+	patrol_points.append(point_b.global_position)
+	target_point_index = 1
 
 # Extracted sprite logic to a helper function to keep the physics process clean
 func _update_sprite() -> void:
@@ -50,6 +61,18 @@ func _update_sprite() -> void:
 			var start_position: Vector2 = light_start_positions[light]
 			light.position.x = start_position.x * direction * -1
 		
+func _update_direction(movement_to_target: Vector2) -> void:
+	if absf(movement_to_target.x) <= 0.01:
+		return
+
+	direction = 1 if movement_to_target.x > 0.0 else -1
+	_update_sprite()
+
+func _advance_patrol_target() -> void:
+	target_point_index = 1 - target_point_index
+
+	var movement_to_target: Vector2 = patrol_points[target_point_index] - global_position
+	_update_direction(movement_to_target)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

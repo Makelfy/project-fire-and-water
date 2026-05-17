@@ -2,22 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="2_nd71p"]
-<<<<<<< HEAD
-[ext_resource type="Texture2D" uid="uid://b5o6em583qkgv" path="res://assets/images/Sprite-0002-Sheet.png" id="2_rnaij"]
+
+[ext_resource type="Texture2D" uid="uid://bttwdcaa02r63" path="res://assets/images/Sprite-0002-Sheet.png" id="2_rnaij"]
 [ext_resource type="PackedScene" uid="uid://bh8t3lwtdxfk6" path="res://scenes/player_2.tscn" id="4_7ddre"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="5_qjeyg"]
-[ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="6_canvas"]
+
+[ext_resource type="Script" uid="uid://cu86vlmtay04e" path="res://scripts/canvas_layer.gd" id="6_canvas"]
 [ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="7_gameover"]
 [ext_resource type="PackedScene" uid="uid://bvmjmb4y3q1gy" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
-=======
-[ext_resource type="Texture2D" uid="uid://bttwdcaa02r63" path="res://assets/images/Sprite-0002-Sheet.png" id="2_rnaij"]
-[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_7ddre"]
-[ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="5_qjeyg"]
-[ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="6_canvas"]
-[ext_resource type="PackedScene" path="res://scenes/gameover.tscn" id="7_gameover"]
-[ext_resource type="PackedScene" path="res://scenes/flying_enemy.tscn" id="8_rnaij"]
->>>>>>> 7910a6c6f6ca3ea5483b884d6f6a9393505313a5
-[ext_resource type="PackedScene" path="res://scenes/spike.tscn" id="9_h3xc6"]
+[ext_resource type="PackedScene" uid="uid://bh6m1ek5wcrh7" path="res://scenes/spike.tscn" id="9_h3xc6"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjeyg"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1164,8 +1157,15 @@ position = Vector2(-144, -152)
 position = Vector2(-352, -152)
 
 [node name="Enemy" parent="." unique_id=1901609634 instance=ExtResource("1_j8ivh")]
-position = Vector2(352, -200)
-Distance = 500.0
+position = Vector2(442, -87)
+patrol_point_a = NodePath("PointA")
+patrol_point_b = NodePath("PointB")
+
+[node name="PointA" type="Marker2D" parent="Enemy" unique_id=975641928]
+position = Vector2(174, 0)
+
+[node name="PointB" type="Marker2D" parent="Enemy" unique_id=975002900]
+position = Vector2(-154, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=662595240]
 process_mode = 3
@@ -1188,7 +1188,7 @@ text = "RESTART"
 
 [node name="FlyingEnemy" parent="." unique_id=1774007836 instance=ExtResource("8_rnaij")]
 z_index = 3
-position = Vector2(-48, -111)
+position = Vector2(144, -141)
 
 [node name="Spike" parent="." unique_id=497970394 instance=ExtResource("9_h3xc6")]
 position = Vector2(-16, -55)
