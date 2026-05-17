@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c52ngt11crnuq" path="res://scripts/main_menu.gd" id="1_menu"]
 [ext_resource type="Texture2D" uid="uid://kmlr3mnewax4" path="res://assets/images/menu.png" id="2_bqqt6"]
 [ext_resource type="FontFile" uid="uid://djcbw0266806g" path="res://font/ARCADECLASSIC.TTF" id="3_font"]
+[ext_resource type="AudioStream" uid="uid://se4oa6whwduk" path="res://audio/sountracks/main_menu_theme.mp3" id="4_theme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.0156863, 0.0196078, 0.027451, 0.82)
@@ -100,5 +101,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
 theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 text = "PLAY"
+
+[node name="MainMenuTheme" type="AudioStreamPlayer" parent="." unique_id=1540902981]
+stream = ExtResource("4_theme")
+autoplay = true
 
 [connection signal="pressed" from="MenuPanel/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
