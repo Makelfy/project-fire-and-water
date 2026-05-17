@@ -1,22 +1,53 @@
-[gd_scene format=3 uid="uid://ba3nunuuf1ek"]
+[gd_scene format=3 uid="uid://bglb1a0hflbft"]
 
 [ext_resource type="Script" uid="uid://drwh624jcaes3" path="res://scripts/ranged_monster.gd" id="1_rwvi7"]
-[ext_resource type="PackedScene" uid="uid://cykrfm76nmcrb" path="res://scenes/bullet.tscn" id="2_4xx58"]
-[ext_resource type="Texture2D" uid="uid://d0qx6wbf2gpd1" path="res://assets/images/enemy.png" id="2_yb8kd"]
+[ext_resource type="PackedScene" uid="uid://b3ecxlmyl5780" path="res://scenes/bullet.tscn" id="2_4xx58"]
+[ext_resource type="Texture2D" uid="uid://chqh70i21l4h7" path="res://assets/images/shooting_enemy.png" id="3_4xx58"]
+[ext_resource type="AudioStream" uid="uid://csy3dt8munia3" path="res://audio/sound_effects/enemy/shooting_enemy/attack/shooting_enemy_attack2.mp3" id="3_e2meb"]
+[ext_resource type="AudioStream" uid="uid://c0kxv8x6i1dur" path="res://audio/sound_effects/enemy/shooting_enemy/attack/shooting_enemy_attack3.mp3" id="4_i373v"]
+[ext_resource type="Texture2D" uid="uid://dynj5a1r2lq88" path="res://assets/images/shooting_enemy2.png" id="4_kgish"]
+[ext_resource type="AudioStream" uid="uid://bps44gweusiol" path="res://audio/sound_effects/enemy/shooting_enemy/attack/shooting_enemy_attack4.mp3" id="5_jgs8b"]
+[ext_resource type="Texture2D" uid="uid://cbia1arbe7vrv" path="res://assets/images/shooting_enemy_shoot.png" id="5_kgish"]
+[ext_resource type="AudioStream" uid="uid://dm8mq47x8r3ri" path="res://audio/sound_effects/enemy/shooting_enemy/attack/shooting_enemy_attack5.mp3" id="6_iqp7w"]
+[ext_resource type="AudioStream" uid="uid://davkaasf6uane" path="res://audio/sound_effects/enemy/shooting_enemy/attack/shooting_enemy_attack.mp3" id="7_8gedd"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4xx58"]
-height = 36.0
+[sub_resource type="SpriteFrames" id="SpriteFrames_5boi2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4xx58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kgish")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_kgish")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74y1t"]
+size = Vector2(24, 46)
 
 [node name="RangedMonster" type="Area2D" unique_id=1576581175 groups=["enemy"]]
 collision_mask = 7
 script = ExtResource("1_rwvi7")
 bullet = ExtResource("2_4xx58")
+shoot1 = ExtResource("3_e2meb")
+shoot2 = ExtResource("4_i373v")
+shoot3 = ExtResource("5_jgs8b")
+shoot4 = ExtResource("6_iqp7w")
+shoot5 = ExtResource("7_8gedd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=316910807]
-shape = SubResource("CapsuleShape2D_4xx58")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=779214289]
-texture = ExtResource("2_yb8kd")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=873292329]
+sprite_frames = SubResource("SpriteFrames_5boi2")
 
 [node name="Player1Raycast" type="RayCast2D" parent="." unique_id=382995108]
 collision_mask = 6
@@ -27,6 +58,14 @@ collision_mask = 6
 [node name="Timer" type="Timer" parent="." unique_id=643343213]
 wait_time = 3.0
 autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=316910807]
+position = Vector2(2, 9)
+shape = SubResource("RectangleShape2D_74y1t")
+
+[node name="Timer2" type="Timer" parent="." unique_id=297905584]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1637598746]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

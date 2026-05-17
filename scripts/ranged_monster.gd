@@ -9,6 +9,12 @@ extends Area2D
 @onready var player1_raycast: RayCast2D = $Player1Raycast
 @onready var player2_raycast: RayCast2D = $Player2Raycast
 
+@export var shoot1 : AudioStream
+@export var shoot2 : AudioStream
+@export var shoot3 : AudioStream
+@export var shoot4 : AudioStream
+@export var shoot5 : AudioStream
+var shoot_sounds : Array
 var player1_firable: bool = false
 var player2_firable: bool = false
 var isShooting: bool = false
@@ -17,6 +23,12 @@ var HEALTH = 2
 var is_damagable := false
 
 func _ready() -> void:
+	shoot_sounds.append(shoot1)
+	shoot_sounds.append(shoot2)
+	shoot_sounds.append(shoot3)
+	shoot_sounds.append(shoot4)
+	shoot_sounds.append(shoot5)
+	$Sprite2D.play("default")
 	player1_raycast.enabled = true
 	player2_raycast.enabled = true
 
@@ -29,8 +41,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	player1_firable = can_shoot_player(player1, player1_raycast)
-	player2_firable = can_shoot_player(player2, player2_raycast)
+	player1_firable = true
+	player2_firable = true
 
 func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
 	if player == null:
@@ -45,13 +57,17 @@ func can_shoot_player(player: CharacterBody2D, raycast: RayCast2D) -> bool:
 func shoot(player):
 	if bullet == null:
 		return
-
+	$Sprite2D.play("shoot")
+	$AudioStreamPlayer2D.stream = shoot_sounds.pick_random()
+	$AudioStreamPlayer2D.play()
 	var instance = bullet.instantiate()
 	instance.dir = (player.global_position - global_position).normalized()
 	instance.spawnPos = global_position
 	instance.spawnRot = rotation
 	instance.zDex = z_index - 1
 	main.add_child.call_deferred(instance)
+	await get_tree().create_timer(0.1).timeout
+	$Sprite2D.play("default")
 
 func _on_timer_timeout() -> void:
 	if player1_firable and player2_firable:
