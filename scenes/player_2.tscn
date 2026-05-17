@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bh8t3lwtdxfk6"]
 
 [ext_resource type="Script" uid="uid://opem2o1funvr" path="res://scripts/player_2.gd" id="1_l6tho"]
+[ext_resource type="AudioStream" uid="uid://dtofnv86s8rwo" path="res://audio/sound_effects/main_character_hurt.mp3" id="2_b2c7a"]
 [ext_resource type="Texture2D" uid="uid://bvm445mk7hy2h" path="res://assets/images/player2_walk.png" id="2_povjg"]
 [ext_resource type="Script" path="res://scenes/flashlight.gd" id="3_0mr0g"]
 [ext_resource type="Texture2D" uid="uid://bur5u5wl1w8sr" path="res://assets/images/player2_idle.png" id="3_hkoe6"]
@@ -44,6 +45,7 @@ points = PackedVector2Array(352, -144, 0, 0, 384, 0, 496, -80, 480, -144)
 [node name="player2" type="CharacterBody2D" unique_id=1334981847 groups=["player"]]
 collision_layer = 4
 script = ExtResource("1_l6tho")
+hit_sound = ExtResource("2_b2c7a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2121929346]
 position = Vector2(0, -8)
@@ -81,6 +83,8 @@ scale = Vector2(0.11779378, 0.15243904)
 shadow_enabled = true
 texture = ExtResource("9_ne6jw")
 texture_scale = 4.51
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1038108090]
 
 [connection signal="area_entered" from="Flashlight" to="." method="_on_flashlight_area_entered"]
 [connection signal="area_exited" from="Flashlight" to="." method="_on_flashlight_area_exited"]

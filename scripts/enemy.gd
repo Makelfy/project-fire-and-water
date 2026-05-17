@@ -10,6 +10,14 @@ const WALK_ANIMATION := &"walking"
 @export var min_wait_time: float = 0.35
 @export var max_wait_time: float = 1.2
 
+@export var wander1 : AudioStream
+@export var wander2 : AudioStream
+@export var wander3 : AudioStream
+@export var wander4 : AudioStream
+@export var wander5 : AudioStream
+var wander_sounds : Array
+
+
 var patrol_points: Array[Vector2] = []
 var target_point_index: int = 1
 var direction: int = 1
@@ -21,6 +29,13 @@ func _ready() -> void:
 	_setup_patrol_points()
 	_update_sprite()
 	_play_walk_animation()
+	wander_sounds.append(wander1)
+	wander_sounds.append(wander2)
+	wander_sounds.append(wander3)
+	wander_sounds.append(wander4)
+	wander_sounds.append(wander5)
+	$AudioStreamPlayer2D.volume_db = 10
+	$Timer.wait_time = randf_range(5, 7)
 
 func _physics_process(delta: float) -> void:
 	if patrol_points.size() < 2 or is_waiting:
@@ -123,3 +138,8 @@ func take_damage():
 
 func set_damagable(val):
 	is_damagable = val
+
+
+func _on_timer_timeout() -> void:
+	$AudioStreamPlayer2D.stream = wander_sounds.pick_random()
+	$AudioStreamPlayer2D.play()

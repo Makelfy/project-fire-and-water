@@ -13,7 +13,20 @@ var is_damagable := false
 
 var light_start_positions := {}
 
+@export var wander1 : AudioStream
+@export var wander2 : AudioStream
+@export var wander3 : AudioStream
+@export var wander4 : AudioStream
+var wander_sounds : Array
+
 func _ready() -> void:
+	wander_sounds.append(wander1)
+	wander_sounds.append(wander2)
+	wander_sounds.append(wander3)
+	wander_sounds.append(wander4)
+	$AudioStreamPlayer2D.volume_db = 10
+	$Timer.wait_time = randf_range(5, 7)
+	
 	# Save the initial starting position
 	start_pos_x = global_position.x
 	$Sprite2D.play("default")
@@ -74,3 +87,8 @@ func take_damage():
 
 func set_damagable(val):
 	is_damagable = val
+
+
+func _on_timer_timeout() -> void:
+	$AudioStreamPlayer2D.stream = wander_sounds.pick_random()
+	$AudioStreamPlayer2D.play()

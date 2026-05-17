@@ -7,6 +7,7 @@ var SPEED = Config.PLAYER_SPEED
 const ACC = 20.0
 var JUMP_VELOCITY = Config.PLAYER_JUMP_FORCE
 
+@export var hit_sound : AudioStream
 # Knockback parameters
 @export var KNOCKBACK_FORCE = 300
 const KNOCKBACK_DURATION = 0.18
@@ -81,7 +82,8 @@ func handle_death() -> void:
 func take_damage(damage: float) -> void:
 	if is_dead:
 		return
-
+	$AudioStreamPlayer2D.stream = hit_sound
+	$AudioStreamPlayer2D.play()
 	if not damage_cooldown:
 		damage_cooldown = true
 		HEALTH -= damage

@@ -7,6 +7,13 @@ var SPEED = Config.PLAYER_SPEED
 const ACC = 20.0
 var JUMP_VELOCITY = Config.PLAYER_JUMP_FORCE
 
+@export var attack_sound1 :AudioStream
+@export var attack_sound2 :AudioStream
+var attack_sounds : Array
+@export var attackhit_sound1 :AudioStream
+@export var attackhit_sound2 :AudioStream
+var attackhit_sounds : Array
+@export var hit_sound : AudioStream
 # Knockback parameters
 @export var KNOCKBACK_FORCE = 300
 const KNOCKBACK_DURATION = 0.18
@@ -18,6 +25,10 @@ var is_attacking = false
 var is_dead = false
 
 func _ready():
+	attack_sounds.append(attack_sound1)
+	attack_sounds.append(attack_sound2)
+	attackhit_sounds.append(attackhit_sound1)
+	attackhit_sounds.append(attackhit_sound2)
 	HEALTH = Config.PLAYER_HEALTH
 	$AnimatedSprite2D.modulate = Color(1, 1, 1, 1.0)
 	$AnimatedSprite2D.play("default")
@@ -79,6 +90,8 @@ func _physics_process(delta: float) -> void:
 
 func start_attack():
 	is_attacking = true	
+	$AudioStreamPlayer2D.stream = attackhit_sounds.pick_random()
+	$AudioStreamPlayer2D.play()
 	$AnimatedSprite2D.play("ATTACK")
 	$AttackTimer.start()
 	$attack.show()
@@ -91,7 +104,6 @@ func start_attack():
 func handle_death() -> void:
 	if is_dead:
 		return
-
 	is_dead = true
 	velocity = Vector2.ZERO
 	knockback_time_left = 0.0
@@ -116,6 +128,9 @@ func take_damage(damage: float) -> void:
 		return
 	if is_dead:
 		return
+	
+	$AudioStreamPlayer2D.stream = hit_sound
+	$AudioStreamPlayer2D.play()
 
 	if not damage_cooldown:
 		damage_cooldown = true
@@ -148,6 +163,9 @@ func start_timer():
 
 func _on_attack_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("enemy")):
+		if(area.is_damagable):
+			$AudioStreamPlayer2D.stream = attack_sounds.pick_random()
+			$AudioStreamPlayer2D.play()
 		area.take_damage()
 
 func _on_attack_timer_timeout() -> void:
