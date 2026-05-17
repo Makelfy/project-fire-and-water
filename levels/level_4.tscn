@@ -1,14 +1,15 @@
-[gd_scene format=4 uid="uid://fqlppqi6qttq"]
+[gd_scene format=4 uid="uid://d2lxbu3x006wa"]
 
+[ext_resource type="Script" uid="uid://bpguxpw1fpkds" path="res://scripts/level_4.gd" id="1_8hlpj"]
 [ext_resource type="Texture2D" uid="uid://rywgr1trs0kn" path="res://assets/images/icon.svg" id="1_dmnu2"]
 [ext_resource type="Texture2D" uid="uid://slidnfmpmk8v" path="res://assets/images/SpriteSheetsecond.png" id="2_sc6c1"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="3_ng40l"]
-[ext_resource type="PackedScene" uid="uid://bh8t3lwtdxfk6" path="res://scenes/player_2.tscn" id="4_04hp8"]
+[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_04hp8"]
 [ext_resource type="Script" uid="uid://cu86vlmtay04e" path="res://scripts/canvas_layer.gd" id="5_8hlpj"]
 [ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="6_qhnv2"]
-[ext_resource type="PackedScene" path="res://scenes/spike.tscn" id="7_vru0x"]
+[ext_resource type="PackedScene" uid="uid://ddnk0nhyfcwqn" path="res://scenes/spike.tscn" id="7_vru0x"]
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="8_5oqfd"]
-[ext_resource type="PackedScene" uid="uid://d37d6bis83max" path="res://scenes/mole.tscn" id="9_04hp8"]
+[ext_resource type="PackedScene" uid="uid://mrg4ei2ucvqx" path="res://scenes/mole.tscn" id="9_04hp8"]
 [ext_resource type="PackedScene" uid="uid://ba3nunuuf1ek" path="res://scenes/ranged_monster.tscn" id="10_8hlpj"]
 [ext_resource type="PackedScene" uid="uid://bvmjmb4y3q1gy" path="res://scenes/flying_enemy.tscn" id="11_qhnv2"]
 
@@ -1138,8 +1139,12 @@ physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_3qnke")
 sources/1 = SubResource("TileSetAtlasSource_h3xc6")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhnv2"]
+size = Vector2(95.875, 60.125)
+
 [node name="Level4" type="StaticBody2D" unique_id=348861856]
 position = Vector2(560, 639)
+script = ExtResource("1_8hlpj")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
 visible = false
@@ -1154,10 +1159,10 @@ tile_map_data = PackedByteArray("AADd/wEAAQABAAIAAADd/wIAAQABAAMAAADd/wMAAQABAAA
 tile_set = SubResource("TileSet_wtsjf")
 
 [node name="player1" parent="." unique_id=962409094 instance=ExtResource("3_ng40l")]
-position = Vector2(546, -462)
+position = Vector2(568, -471)
 
 [node name="player2" parent="." unique_id=845546760 instance=ExtResource("4_04hp8")]
-position = Vector2(657, -461)
+position = Vector2(679, -470)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=662595240]
 process_mode = 3
@@ -1209,4 +1214,14 @@ player2 = NodePath("../player2")
 [node name="FlyingEnemy" parent="." unique_id=210122755 instance=ExtResource("11_qhnv2")]
 position = Vector2(373, 4)
 
+[node name="Finish" type="Area2D" parent="." unique_id=35489572]
+position = Vector2(312, -63)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish" unique_id=175102598]
+position = Vector2(-728, 76)
+shape = SubResource("RectangleShape2D_qhnv2")
+
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
+[connection signal="body_exited" from="Finish" to="." method="_on_finish_body_exited"]
