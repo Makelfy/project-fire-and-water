@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cbia1arbe7vrv" path="res://assets/images/shooting_enemy_shoot.png" id="5_kgish"]
 [ext_resource type="AudioStream" uid="uid://dm8mq47x8r3ri" path="res://audio/sound_effects/enemy/shooting_enemy/attack/shooting_enemy_attack5.mp3" id="6_iqp7w"]
 [ext_resource type="AudioStream" uid="uid://davkaasf6uane" path="res://audio/sound_effects/enemy/shooting_enemy/attack/shooting_enemy_attack.mp3" id="7_8gedd"]
+[ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="11_i373v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5boi2"]
 animations = [{
@@ -48,6 +49,15 @@ shoot5 = ExtResource("7_8gedd")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=873292329]
 sprite_frames = SubResource("SpriteFrames_5boi2")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=784513238]
+position = Vector2(1.9999971, -6.000001)
+scale = Vector2(0.008187294, 0.007809478)
+color = Color(1, 1, 0, 1)
+energy = 2.85
+shadow_enabled = true
+texture = ExtResource("11_i373v")
+texture_scale = 19.14
 
 [node name="Player1Raycast" type="RayCast2D" parent="." unique_id=382995108]
 collision_mask = 6

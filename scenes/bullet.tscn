@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b3ecxlmyl5780"]
 
 [ext_resource type="Script" uid="uid://c78ed7nds2v4g" path="res://scripts/bullet.gd" id="1_y25gk"]
+[ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="2_y25gk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y25gk"]
 radius = 67.20447
@@ -23,5 +24,14 @@ offset_top = -67.66917
 offset_right = 69.76744
 offset_bottom = 67.66915
 color = Color(1, 0.7137255, 0, 1)
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1210719084]
+position = Vector2(3.8146973e-06, 7.518799)
+scale = Vector2(0.04429824, 0.039896958)
+color = Color(1, 1, 0, 1)
+energy = 2.85
+shadow_enabled = true
+texture = ExtResource("2_y25gk")
+texture_scale = 19.14
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

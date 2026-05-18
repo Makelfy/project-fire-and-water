@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://d4kv4nlusynea" path="res://scripts/level_3.gd" id="1_jq78i"]
 [ext_resource type="Texture2D" uid="uid://slidnfmpmk8v" path="res://assets/images/SpriteSheetsecond.png" id="2_ofchu"]
 [ext_resource type="PackedScene" uid="uid://drb5fwqdgypqh" path="res://scenes/player_1.tscn" id="3_358yg"]
-[ext_resource type="PackedScene" uid="uid://bh8t3lwtdxfk6" path="res://scenes/player_2.tscn" id="4_jxpky"]
-[ext_resource type="Script" uid="uid://cu86vlmtay04e" path="res://scripts/canvas_layer.gd" id="5_06u5y"]
+[ext_resource type="PackedScene" uid="uid://ctvyv02di7av0" path="res://scenes/player_2.tscn" id="4_jxpky"]
+[ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="5_06u5y"]
 [ext_resource type="PackedScene" uid="uid://djul02odexf1a" path="res://scenes/gameover.tscn" id="6_ce4gn"]
 [ext_resource type="PackedScene" uid="uid://ddnk0nhyfcwqn" path="res://scenes/spike.tscn" id="7_t0nuk"]
 [ext_resource type="PackedScene" uid="uid://cbri65q50s534" path="res://scenes/enemy.tscn" id="8_epatr"]
@@ -1144,7 +1144,6 @@ position = Vector2(560, 639)
 script = ExtResource("1_jq78i")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=226177707]
-visible = false
 position = Vector2(16.000122, -316)
 scale = Vector2(0.25599992, 0.21066669)
 color = Color(0, 0, 0, 1)
@@ -1222,3 +1221,5 @@ position = Vector2(-468.9375, -478.9375)
 shape = SubResource("RectangleShape2D_lsnkt")
 
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
+[connection signal="body_exited" from="Finish" to="." method="_on_finish_body_exited"]

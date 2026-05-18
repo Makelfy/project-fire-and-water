@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://myggy8nc8q6l" path="res://assets/images/mole_idle2.png" id="3_xi4vd"]
 [ext_resource type="Texture2D" uid="uid://bfk1w1gscxvbs" path="res://assets/images/mole_dig.png" id="4_ev00m"]
 [ext_resource type="Texture2D" uid="uid://b2v37diov1uqg" path="res://assets/images/mole_dig2.png" id="5_6nfei"]
+[ext_resource type="Texture2D" uid="uid://cx6od42bj8bjs" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="6_ev00m"]
 [ext_resource type="Texture2D" uid="uid://2fkxnpnsj2hq" path="res://assets/images/mole_particle.png" id="6_xi4vd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_slj7y"]
@@ -53,6 +54,15 @@ dig_distance = Vector2(0, -40)
 position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_slj7y")
 animation = &"dig"
+
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=1449615629]
+position = Vector2(-20.58533, 23.090908)
+scale = Vector2(0.0026879772, 0.0028201295)
+color = Color(1, 1, 0, 1)
+energy = 2.85
+shadow_enabled = true
+texture = ExtResource("6_ev00m")
+texture_scale = 19.14
 
 [node name="Timer" type="Timer" parent="." unique_id=887633604]
 wait_time = 5.0
